@@ -17,6 +17,7 @@
     <Property Name="next_task" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Prescription" Relationship="Self.FK__Consultat__presc__1273C1CD" FromRole="Consultation" ToRole="Prescription" />
     <Property Name="next_date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="next_time" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Prescription">
     <Key>
@@ -25,14 +26,13 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="patient_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="patient_age" Type="Int32" Nullable="false" />
-    <Property Name="patient_contact" Type="Int32" Nullable="false" />
+    <Property Name="patient_contact" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
     <Property Name="prescription_date" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="oral_examination" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="medical_history" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="investigation" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="advice" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="treatment" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-    <Property Name="appointment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="next_task" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="surgeon_charge" Type="Int32" />
     <Property Name="assisstant_charge" Type="Int32" />
@@ -46,6 +46,8 @@
     <Property Name="polishing_bar" Type="Int32" />
     <Property Name="polishing_paste" Type="Int32" />
     <NavigationProperty Name="Consultations" Relationship="Self.FK__Consultat__presc__1273C1CD" FromRole="Prescription" ToRole="Consultation" />
+    <Property Name="appointment_date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="appointment_time" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="FK__Consultat__presc__1273C1CD">
     <End Role="Prescription" Type="Self.Prescription" Multiplicity="0..1" />

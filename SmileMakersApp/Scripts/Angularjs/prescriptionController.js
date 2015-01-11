@@ -116,7 +116,7 @@ app.controller("prescriptionController", function ($scope, $location, prescripti
     if (day < 10) {
         day = "0" + day;
     };
-    $scope.date = day + "/" + month + "/" + year;
+    $scope.date = day + "-" + month + "-" + year;
 
     $scope.Treatment = "";
     $scope.addTreatmentDetails = function () {
@@ -181,7 +181,8 @@ app.controller("prescriptionController", function ($scope, $location, prescripti
             investigation: $scope.Investigation,
             advice: $scope.Advice,
             treatment: $scope.Treatment,
-            appointment: $scope.Appointment,
+            appointment_date: $scope.AppointmentDate,
+            appointment_time: $scope.AppointmentTime,
             next_task: $scope.NextTask,
             surgeon_charge: $scope.SurgeonCharge,
             assisstant_charge: $scope.AssisstantCharge,

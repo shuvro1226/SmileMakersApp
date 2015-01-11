@@ -4,9 +4,8 @@
 
 app.service("prescriptionService", function ($http) {
     // Get all prescriptions
-    this.getPrescriptions = function () {
-        console.log("Accessed");
-        return $http.get("api/PrescriptionAPI");
+    this.getPrescriptions = function (date) {
+        return $http.get("api/PrescriptionAPI/" + date);
     }
 
 

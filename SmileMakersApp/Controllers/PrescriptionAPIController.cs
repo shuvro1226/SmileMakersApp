@@ -17,36 +17,38 @@ namespace SmileMakersApp.Controllers
         private SmileMakersAppDataEntities db = new SmileMakersAppDataEntities();
 
         // GET api/PrescriptionAPI
-        public IQueryable<Prescription> GetPrescriptions()
+        [Route("api/PrescriptionAPI/{date}")]
+        [HttpGet]
+        public IHttpActionResult GetPrescription(string date)
         {
             //string today = DateTime.Now.ToString("dd/MM/yyyy");
-            //var appointment1 = from prescription in db.Prescriptions
-            //                   where prescription.appointment == today
-            //                   select new
-            //                   {
-            //                       ID = prescription.id,
-            //                       Name = prescription.patient_name,
-            //                       Contact = prescription.patient_contact,
-            //                       Task = prescription.next_task
-            //                   };
+            var appointment1 = from prescription in db.Prescriptions
+                               where prescription.appointment_date == date
+                               select new
+                               {
+                                   Time = prescription.appointment_time,
+                                   Name = prescription.patient_name,
+                                   Contact = prescription.patient_contact,
+                                   Task = prescription.next_task
+                               };
 
-            //var appointment2 = from consultation in db.Consultations
-            //                   where consultation.next_date == today
-            //                   select new
-            //                   {
-            //                       ID = consultation.Prescription.id,
-            //                       Name = consultation.Prescription.patient_name,
-            //                       Contact = consultation.Prescription.patient_contact,
-            //                       Task = consultation.next_task
-            //                   };
+            var appointment2 = from consultation in db.Consultations
+                               where consultation.next_date == date
+                               select new
+                               {
+                                   Time = consultation.next_time,
+                                   Name = consultation.Prescription.patient_name,
+                                   Contact = consultation.Prescription.patient_contact,
+                                   Task = consultation.next_task
+                               };
 
-            //var finalAppointments = appointment1.Concat(appointment2);
+            var finalAppointments = appointment1.Concat(appointment2);
 
-            //return finalAppointments;
-            return db.Prescriptions;
+            return Ok(finalAppointments);
+            //return db.Prescriptions;
         }
 
-        // GET api/PrescriptionAPI/5
+        //GET api/PrescriptionAPI/5
         [ResponseType(typeof(Prescription))]
         public IHttpActionResult GetPrescription(int id)
         {

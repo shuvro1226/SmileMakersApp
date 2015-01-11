@@ -6,10 +6,21 @@
     $(function () {
         $(".datepicker").datepicker({
             numberOfMonths: 3,
-            dateFormat: "dd/mm/yy",
+            dateFormat: "dd-mm-yy",
             showButtonPanel: true
         });
     });
+</script>
+<script type="text/javascript">
+    $('.clockpicker').clockpicker()
+        .find('input').change(function () {
+            console.log(this.value);
+        });
+
+
+    if (/mobile/i.test(navigator.userAgent)) {
+        $('input').prop('readOnly', true);
+    }
 </script>
 
 
@@ -20,24 +31,33 @@
             <label for="PatientName">Name:</label>
             <input type="text" class="form-control" placeholder="Insert name" ng-model="PatientName" />
         </div>
-        <div class="form-group col-xs-2">
+        <div class="form-group col-xs-1">
             <label for="page">Age:</label>
             <input type="text" class="form-control" placeholder="Age" ng-model="PatientAge" />
         </div>
-        <div class="form-group col-xs-3">
+        <div class="form-group col-xs-2">
             <label for="pcontact">Contacts:</label>
             <input type="text" class="form-control" placeholder="Contact No." ng-model="PatientContact" />
         </div>
         <div class="form-group col-xs-3" style="text-align:right">
             <label for="pdate">Date:</label>
             <label>{{date}}</label>
-            <input type='text' class="form-control datepicker" readonly placeholder="Select next date of appointment" style="cursor:pointer" ng-model="Appointment" />
+            <input type='text' class="form-control datepicker" readonly placeholder="Select appointment date" style="cursor:pointer" ng-model="AppointmentDate" />
+        </div>
+        <div class="form-group col-xs-2">
+            <label for="pdate">Time:</label>
+            <div class="input-group clockpicker">
+                <input type="text" class="form-control" ng-model="AppointmentTime" readonly>
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-time"></span>
+                </span>
+            </div>	
         </div>
     </div>
 
     <div class="form-group">
-        <label for="nexttask">Next Task:</label>
-        <textarea class="form-control" ng-model="NextTask" ng-disabled="!Appointment"></textarea>
+        <label for="nexttask">Appointment Details:</label>
+        <textarea class="form-control" ng-model="NextTask" ng-disabled="!AppointmentDate || !AppointmentTime"></textarea>
     </div>
 
     <div class="form-group">

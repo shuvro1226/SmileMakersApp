@@ -213,6 +213,7 @@
     <Content Include="App_Data\SmileMakersAppData_log.ldf">
       <DependentUpon>SmileMakersAppData.mdf</DependentUpon>
     </Content>
+    <Content Include="Content\bootstrap-clockpicker.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\themes\base\accordion.css" />
@@ -262,6 +263,7 @@
     <Content Include="Scripts\Angularjs\prescriptionController.js" />
     <Content Include="Scripts\Angularjs\services.js" />
     <Content Include="Scripts\Angularjs\showAppointmentsController.js" />
+    <Content Include="Scripts\bootstrap-clockpicker.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <EntityDeploy Include="Models\SmileMakersAppDataModel.edmx">

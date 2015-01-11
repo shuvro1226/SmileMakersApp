@@ -2,6 +2,32 @@
     ViewBag.Title = "Home Page";
 }
 
+<script type="text/javascript">
+    $(function () {
+        $(".datepicker").datepicker({
+            numberOfMonths: 3,
+            dateFormat: "dd-mm-yy",
+            showButtonPanel: true
+        });
+    });
+</script>
+
 <div ng-controller="showAppointmentsController">
-    {{Prescription}}
+    <div style="margin-top: 50px">
+        <input type='text' class="form-control datepicker" readonly="readonly" placeholder="Select date" style="cursor:pointer" ng-model="date" ng-change="dateChanged()" />
+        <table class="table table-bordered">
+            <tr>
+                <th>Time</th>
+                <th>Patient's Name</th>
+                <th>Scheduled Task</th>
+                <th>Contact No.</th>
+            </tr>
+            <tr ng-repeat="appointment in appointments">
+                <td>{{appointment.Time}}</td>
+                <td>{{appointment.Name}}</td>
+                <td>{{appointment.Task}}</td>
+                <td>{{appointment.Contact}}</td>
+            </tr>
+        </table>
+    </div>
 </div>

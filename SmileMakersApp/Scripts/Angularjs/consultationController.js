@@ -13,7 +13,7 @@ app.controller("consultationController", function ($scope, consultationService) 
     if (day < 10) {
         day = "0" + day;
     };
-    $scope.ConsultDate = day + "/" + month + "/" + year;
+    $scope.ConsultDate = day + "-" + month + "-" + year;
     
     $scope.teethUR = [{ id: 1, checked: false }, { id: 2, checked: false }, { id: 3, checked: false }, { id: 4, checked: false }, { id: 5, checked: false }, { id: 6, checked: false }, { id: 7, checked: false }, { id: 8, checked: false }];
     $scope.upperRight = function () {
@@ -77,6 +77,7 @@ app.controller("consultationController", function ($scope, consultationService) 
             prescription_id: $scope.PresID,
             consultation_date: $scope.ConsultDate,
             next_date: $scope.NextConsultDate,
+            next_time: $scope.NextConsultTime,
             next_task: $scope.NextConsultWork,
             payment_recieved: $scope.AmountPaid,
             payment_left: $scope.AmountRemain,

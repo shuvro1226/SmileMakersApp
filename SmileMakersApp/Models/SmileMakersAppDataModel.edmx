@@ -21,6 +21,7 @@
           <Property Name="lower_right" Type="varchar" MaxLength="50" />
           <Property Name="next_task" Type="varchar" MaxLength="500" />
           <Property Name="next_date" Type="varchar" MaxLength="50" />
+          <Property Name="next_time" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Prescription">
           <Key>
@@ -29,14 +30,15 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="patient_name" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="patient_age" Type="int" Nullable="false" />
-          <Property Name="patient_contact" Type="int" Nullable="false" />
+          <Property Name="patient_contact" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="prescription_date" Type="date" Nullable="false" />
           <Property Name="oral_examination" Type="varchar" MaxLength="500" />
           <Property Name="medical_history" Type="varchar" MaxLength="500" />
           <Property Name="investigation" Type="varchar" MaxLength="500" />
           <Property Name="advice" Type="varchar" MaxLength="500" />
           <Property Name="treatment" Type="varchar" MaxLength="500" />
-          <Property Name="appointment" Type="varchar" MaxLength="50" />
+          <Property Name="appointment_date" Type="varchar" MaxLength="50" />
+          <Property Name="appointment_time" Type="varchar" MaxLength="50" />
           <Property Name="next_task" Type="varchar" MaxLength="500" />
           <Property Name="surgeon_charge" Type="int" />
           <Property Name="assisstant_charge" Type="int" />
@@ -50,7 +52,7 @@
           <Property Name="polishing_bar" Type="int" />
           <Property Name="polishing_paste" Type="int" />
         </EntityType>
-        <Association Name="FK__Consultat__presc__1273C1CD">
+        <Association Name="FK__Consultat__presc__239E4DCF">
           <End Role="Prescription" Type="Self.Prescription" Multiplicity="0..1" />
           <End Role="Consultation" Type="Self.Consultation" Multiplicity="*" />
           <ReferentialConstraint>
@@ -65,7 +67,7 @@
         <EntityContainer Name="SmileMakersAppDataModelStoreContainer">
           <EntitySet Name="Consultation" EntityType="Self.Consultation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Prescription" EntityType="Self.Prescription" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Consultat__presc__1273C1CD" Association="Self.FK__Consultat__presc__1273C1CD">
+          <AssociationSet Name="FK__Consultat__presc__239E4DCF" Association="Self.FK__Consultat__presc__239E4DCF">
             <End Role="Prescription" EntitySet="Prescription" />
             <End Role="Consultation" EntitySet="Consultation" />
           </AssociationSet>
@@ -91,6 +93,7 @@
           <Property Name="next_task" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Prescription" Relationship="Self.FK__Consultat__presc__1273C1CD" FromRole="Consultation" ToRole="Prescription" />
           <Property Name="next_date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="next_time" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Prescription">
           <Key>
@@ -99,14 +102,13 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="patient_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="patient_age" Type="Int32" Nullable="false" />
-          <Property Name="patient_contact" Type="Int32" Nullable="false" />
+          <Property Name="patient_contact" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="prescription_date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="oral_examination" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="medical_history" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="investigation" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="advice" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="treatment" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="appointment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="next_task" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="surgeon_charge" Type="Int32" />
           <Property Name="assisstant_charge" Type="Int32" />
@@ -120,6 +122,8 @@
           <Property Name="polishing_bar" Type="Int32" />
           <Property Name="polishing_paste" Type="Int32" />
           <NavigationProperty Name="Consultations" Relationship="Self.FK__Consultat__presc__1273C1CD" FromRole="Prescription" ToRole="Consultation" />
+          <Property Name="appointment_date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="appointment_time" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK__Consultat__presc__1273C1CD">
           <End Role="Prescription" Type="Self.Prescription" Multiplicity="0..1" />
@@ -150,6 +154,7 @@
           <EntitySetMapping Name="Consultations">
             <EntityTypeMapping TypeName="SmileMakersAppDataModel.Consultation">
               <MappingFragment StoreEntitySet="Consultation">
+                <ScalarProperty Name="next_time" ColumnName="next_time" />
                 <ScalarProperty Name="next_date" ColumnName="next_date" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="prescription_id" ColumnName="prescription_id" />
@@ -168,6 +173,8 @@
           <EntitySetMapping Name="Prescriptions">
             <EntityTypeMapping TypeName="SmileMakersAppDataModel.Prescription">
               <MappingFragment StoreEntitySet="Prescription">
+                <ScalarProperty Name="appointment_time" ColumnName="appointment_time" />
+                <ScalarProperty Name="appointment_date" ColumnName="appointment_date" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="patient_name" ColumnName="patient_name" />
                 <ScalarProperty Name="patient_age" ColumnName="patient_age" />
@@ -178,7 +185,6 @@
                 <ScalarProperty Name="investigation" ColumnName="investigation" />
                 <ScalarProperty Name="advice" ColumnName="advice" />
                 <ScalarProperty Name="treatment" ColumnName="treatment" />
-                <ScalarProperty Name="appointment" ColumnName="appointment" />
                 <ScalarProperty Name="next_task" ColumnName="next_task" />
                 <ScalarProperty Name="surgeon_charge" ColumnName="surgeon_charge" />
                 <ScalarProperty Name="assisstant_charge" ColumnName="assisstant_charge" />

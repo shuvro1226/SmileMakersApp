@@ -6,10 +6,21 @@
     $(function () {
         $(".datepicker").datepicker({
             numberOfMonths: 3,
-            dateFormat: "dd/mm/yy",
+            dateFormat: "dd-mm-yy",
             showButtonPanel: true
         });
     });
+</script>
+<script type="text/javascript">
+    $('.clockpicker').clockpicker()
+        .find('input').change(function () {
+            console.log(this.value);
+        });
+
+
+    if (/mobile/i.test(navigator.userAgent)) {
+        $('input').prop('readOnly', true);
+    }
 </script>
 
 <div class="" ng-controller="consultationController">
@@ -32,10 +43,19 @@
                 <input type='text' class="form-control datepicker" readonly="readonly" placeholder="Select date" style="cursor:pointer" ng-model="NextConsultDate" />
             </div>
         </div>
-        <div class="col-xs-6">
+        <div class="form-group col-xs-2">
+            <label for="pdate">Next Time:</label>
+            <div class="input-group clockpicker">
+                <input type="text" class="form-control" ng-model="NextConsultTime" readonly>
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-time"></span>
+                </span>
+            </div>
+        </div>
+        <div class="col-xs-4">
             <div class="form-group">
                 <label for="">Next Task</label>
-                <input type='text' class="form-control" placeholder="Work going to be done" ng-model="NextConsultWork" />
+                <input type='text' class="form-control" placeholder="Work going to be done" ng-model="NextConsultWork" ng-disabled="!NextConsultDate || !NextConsultTime" />
             </div>
         </div>
     </div>
