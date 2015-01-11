@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SmileMakersAppDataModelStoreContainer" CdmEntityContainer="SmileMakersAppDataEntities">
+    <EntitySetMapping Name="Consultations">
+      <EntityTypeMapping TypeName="SmileMakersAppDataModel.Consultation">
+        <MappingFragment StoreEntitySet="Consultation">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="prescription_id" ColumnName="prescription_id" />
+          <ScalarProperty Name="consultation_date" ColumnName="consultation_date" />
+          <ScalarProperty Name="payment_recieved" ColumnName="payment_recieved" />
+          <ScalarProperty Name="payment_left" ColumnName="payment_left" />
+          <ScalarProperty Name="work_done" ColumnName="work_done" />
+          <ScalarProperty Name="upper_left" ColumnName="upper_left" />
+          <ScalarProperty Name="upper_right" ColumnName="upper_right" />
+          <ScalarProperty Name="lower_left" ColumnName="lower_left" />
+          <ScalarProperty Name="lower_right" ColumnName="lower_right" />
+          <ScalarProperty Name="next_task" ColumnName="next_task" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Prescriptions">
+      <EntityTypeMapping TypeName="SmileMakersAppDataModel.Prescription">
+        <MappingFragment StoreEntitySet="Prescription">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="patient_name" ColumnName="patient_name" />
+          <ScalarProperty Name="patient_age" ColumnName="patient_age" />
+          <ScalarProperty Name="patient_contact" ColumnName="patient_contact" />
+          <ScalarProperty Name="prescription_date" ColumnName="prescription_date" />
+          <ScalarProperty Name="oral_examination" ColumnName="oral_examination" />
+          <ScalarProperty Name="medical_history" ColumnName="medical_history" />
+          <ScalarProperty Name="investigation" ColumnName="investigation" />
+          <ScalarProperty Name="advice" ColumnName="advice" />
+          <ScalarProperty Name="treatment" ColumnName="treatment" />
+          <ScalarProperty Name="appointment" ColumnName="appointment" />
+          <ScalarProperty Name="next_task" ColumnName="next_task" />
+          <ScalarProperty Name="surgeon_charge" ColumnName="surgeon_charge" />
+          <ScalarProperty Name="assisstant_charge" ColumnName="assisstant_charge" />
+          <ScalarProperty Name="ot_charge" ColumnName="ot_charge" />
+          <ScalarProperty Name="suction_tube" ColumnName="suction_tube" />
+          <ScalarProperty Name="gloves" ColumnName="gloves" />
+          <ScalarProperty Name="sterilization_cost" ColumnName="sterilization_cost" />
+          <ScalarProperty Name="needle" ColumnName="needle" />
+          <ScalarProperty Name="remar_file" ColumnName="remar_file" />
+          <ScalarProperty Name="bar" ColumnName="bar" />
+          <ScalarProperty Name="polishing_bar" ColumnName="polishing_bar" />
+          <ScalarProperty Name="polishing_paste" ColumnName="polishing_paste" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

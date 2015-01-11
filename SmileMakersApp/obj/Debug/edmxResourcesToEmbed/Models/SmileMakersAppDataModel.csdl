@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SmileMakersAppDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Consultation">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="prescription_id" Type="Int32" />
+    <Property Name="consultation_date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="payment_recieved" Type="Int32" />
+    <Property Name="payment_left" Type="Int32" />
+    <Property Name="work_done" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="upper_left" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="upper_right" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="lower_left" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="lower_right" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="next_task" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Prescription" Relationship="Self.FK__Consultat__presc__1273C1CD" FromRole="Consultation" ToRole="Prescription" />
+  </EntityType>
+  <EntityType Name="Prescription">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="patient_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="patient_age" Type="Int32" Nullable="false" />
+    <Property Name="patient_contact" Type="Int32" Nullable="false" />
+    <Property Name="prescription_date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="oral_examination" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="medical_history" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="investigation" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="advice" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="treatment" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="appointment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="next_task" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="surgeon_charge" Type="Int32" />
+    <Property Name="assisstant_charge" Type="Int32" />
+    <Property Name="ot_charge" Type="Int32" />
+    <Property Name="suction_tube" Type="Int32" />
+    <Property Name="gloves" Type="Int32" />
+    <Property Name="sterilization_cost" Type="Int32" />
+    <Property Name="needle" Type="Int32" />
+    <Property Name="remar_file" Type="Int32" />
+    <Property Name="bar" Type="Int32" />
+    <Property Name="polishing_bar" Type="Int32" />
+    <Property Name="polishing_paste" Type="Int32" />
+    <NavigationProperty Name="Consultations" Relationship="Self.FK__Consultat__presc__1273C1CD" FromRole="Prescription" ToRole="Consultation" />
+  </EntityType>
+  <Association Name="FK__Consultat__presc__1273C1CD">
+    <End Role="Prescription" Type="Self.Prescription" Multiplicity="0..1" />
+    <End Role="Consultation" Type="Self.Consultation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Prescription">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Consultation">
+        <PropertyRef Name="prescription_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SmileMakersAppDataEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Consultations" EntityType="Self.Consultation" />
+    <EntitySet Name="Prescriptions" EntityType="Self.Prescription" />
+    <AssociationSet Name="FK__Consultat__presc__1273C1CD" Association="Self.FK__Consultat__presc__1273C1CD">
+      <End Role="Prescription" EntitySet="Prescriptions" />
+      <End Role="Consultation" EntitySet="Consultations" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

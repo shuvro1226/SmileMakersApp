@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SmileMakersAppDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Consultation">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="prescription_id" Type="int" />
+          <Property Name="consultation_date" Type="varchar" MaxLength="50" />
+          <Property Name="payment_recieved" Type="int" />
+          <Property Name="payment_left" Type="int" />
+          <Property Name="work_done" Type="varchar" MaxLength="500" />
+          <Property Name="upper_left" Type="varchar" MaxLength="50" />
+          <Property Name="upper_right" Type="varchar" MaxLength="50" />
+          <Property Name="lower_left" Type="varchar" MaxLength="50" />
+          <Property Name="lower_right" Type="varchar" MaxLength="50" />
+          <Property Name="next_task" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Prescription">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="patient_name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="patient_age" Type="int" Nullable="false" />
+          <Property Name="patient_contact" Type="int" Nullable="false" />
+          <Property Name="prescription_date" Type="date" Nullable="false" />
+          <Property Name="oral_examination" Type="varchar" MaxLength="500" />
+          <Property Name="medical_history" Type="varchar" MaxLength="500" />
+          <Property Name="investigation" Type="varchar" MaxLength="500" />
+          <Property Name="advice" Type="varchar" MaxLength="500" />
+          <Property Name="treatment" Type="varchar" MaxLength="500" />
+          <Property Name="appointment" Type="varchar" MaxLength="50" />
+          <Property Name="next_task" Type="varchar" MaxLength="500" />
+          <Property Name="surgeon_charge" Type="int" />
+          <Property Name="assisstant_charge" Type="int" />
+          <Property Name="ot_charge" Type="int" />
+          <Property Name="suction_tube" Type="int" />
+          <Property Name="gloves" Type="int" />
+          <Property Name="sterilization_cost" Type="int" />
+          <Property Name="needle" Type="int" />
+          <Property Name="remar_file" Type="int" />
+          <Property Name="bar" Type="int" />
+          <Property Name="polishing_bar" Type="int" />
+          <Property Name="polishing_paste" Type="int" />
+        </EntityType>
+        <Association Name="FK__Consultat__presc__1273C1CD">
+          <End Role="Prescription" Type="Self.Prescription" Multiplicity="0..1" />
+          <End Role="Consultation" Type="Self.Consultation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prescription">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Consultation">
+              <PropertyRef Name="prescription_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SmileMakersAppDataModelStoreContainer">
+          <EntitySet Name="Consultation" EntityType="Self.Consultation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Prescription" EntityType="Self.Prescription" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Consultat__presc__1273C1CD" Association="Self.FK__Consultat__presc__1273C1CD">
+            <End Role="Prescription" EntitySet="Prescription" />
+            <End Role="Consultation" EntitySet="Consultation" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SmileMakersAppDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Consultation">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="prescription_id" Type="Int32" />
+          <Property Name="consultation_date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="payment_recieved" Type="Int32" />
+          <Property Name="payment_left" Type="Int32" />
+          <Property Name="work_done" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="upper_left" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="upper_right" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="lower_left" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="lower_right" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="next_task" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Prescription" Relationship="Self.FK__Consultat__presc__1273C1CD" FromRole="Consultation" ToRole="Prescription" />
+        </EntityType>
+        <EntityType Name="Prescription">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="patient_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="patient_age" Type="Int32" Nullable="false" />
+          <Property Name="patient_contact" Type="Int32" Nullable="false" />
+          <Property Name="prescription_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="oral_examination" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="medical_history" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="investigation" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="advice" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="treatment" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="appointment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="next_task" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="surgeon_charge" Type="Int32" />
+          <Property Name="assisstant_charge" Type="Int32" />
+          <Property Name="ot_charge" Type="Int32" />
+          <Property Name="suction_tube" Type="Int32" />
+          <Property Name="gloves" Type="Int32" />
+          <Property Name="sterilization_cost" Type="Int32" />
+          <Property Name="needle" Type="Int32" />
+          <Property Name="remar_file" Type="Int32" />
+          <Property Name="bar" Type="Int32" />
+          <Property Name="polishing_bar" Type="Int32" />
+          <Property Name="polishing_paste" Type="Int32" />
+          <NavigationProperty Name="Consultations" Relationship="Self.FK__Consultat__presc__1273C1CD" FromRole="Prescription" ToRole="Consultation" />
+        </EntityType>
+        <Association Name="FK__Consultat__presc__1273C1CD">
+          <End Role="Prescription" Type="Self.Prescription" Multiplicity="0..1" />
+          <End Role="Consultation" Type="Self.Consultation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prescription">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Consultation">
+              <PropertyRef Name="prescription_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SmileMakersAppDataEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Consultations" EntityType="Self.Consultation" />
+          <EntitySet Name="Prescriptions" EntityType="Self.Prescription" />
+          <AssociationSet Name="FK__Consultat__presc__1273C1CD" Association="Self.FK__Consultat__presc__1273C1CD">
+            <End Role="Prescription" EntitySet="Prescriptions" />
+            <End Role="Consultation" EntitySet="Consultations" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SmileMakersAppDataModelStoreContainer" CdmEntityContainer="SmileMakersAppDataEntities">
+          <EntitySetMapping Name="Consultations">
+            <EntityTypeMapping TypeName="SmileMakersAppDataModel.Consultation">
+              <MappingFragment StoreEntitySet="Consultation">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="prescription_id" ColumnName="prescription_id" />
+                <ScalarProperty Name="consultation_date" ColumnName="consultation_date" />
+                <ScalarProperty Name="payment_recieved" ColumnName="payment_recieved" />
+                <ScalarProperty Name="payment_left" ColumnName="payment_left" />
+                <ScalarProperty Name="work_done" ColumnName="work_done" />
+                <ScalarProperty Name="upper_left" ColumnName="upper_left" />
+                <ScalarProperty Name="upper_right" ColumnName="upper_right" />
+                <ScalarProperty Name="lower_left" ColumnName="lower_left" />
+                <ScalarProperty Name="lower_right" ColumnName="lower_right" />
+                <ScalarProperty Name="next_task" ColumnName="next_task" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Prescriptions">
+            <EntityTypeMapping TypeName="SmileMakersAppDataModel.Prescription">
+              <MappingFragment StoreEntitySet="Prescription">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="patient_name" ColumnName="patient_name" />
+                <ScalarProperty Name="patient_age" ColumnName="patient_age" />
+                <ScalarProperty Name="patient_contact" ColumnName="patient_contact" />
+                <ScalarProperty Name="prescription_date" ColumnName="prescription_date" />
+                <ScalarProperty Name="oral_examination" ColumnName="oral_examination" />
+                <ScalarProperty Name="medical_history" ColumnName="medical_history" />
+                <ScalarProperty Name="investigation" ColumnName="investigation" />
+                <ScalarProperty Name="advice" ColumnName="advice" />
+                <ScalarProperty Name="treatment" ColumnName="treatment" />
+                <ScalarProperty Name="appointment" ColumnName="appointment" />
+                <ScalarProperty Name="next_task" ColumnName="next_task" />
+                <ScalarProperty Name="surgeon_charge" ColumnName="surgeon_charge" />
+                <ScalarProperty Name="assisstant_charge" ColumnName="assisstant_charge" />
+                <ScalarProperty Name="ot_charge" ColumnName="ot_charge" />
+                <ScalarProperty Name="suction_tube" ColumnName="suction_tube" />
+                <ScalarProperty Name="gloves" ColumnName="gloves" />
+                <ScalarProperty Name="sterilization_cost" ColumnName="sterilization_cost" />
+                <ScalarProperty Name="needle" ColumnName="needle" />
+                <ScalarProperty Name="remar_file" ColumnName="remar_file" />
+                <ScalarProperty Name="bar" ColumnName="bar" />
+                <ScalarProperty Name="polishing_bar" ColumnName="polishing_bar" />
+                <ScalarProperty Name="polishing_paste" ColumnName="polishing_paste" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

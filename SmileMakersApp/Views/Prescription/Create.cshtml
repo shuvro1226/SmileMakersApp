@@ -1,0 +1,180 @@
+﻿@{
+    ViewBag.Title = "Create";
+}
+
+<script type="text/javascript">
+    $(function () {
+        $(".datepicker").datepicker({
+            numberOfMonths: 3,
+            dateFormat: "dd/mm/yy",
+            showButtonPanel: true
+        });
+    });
+</script>
+
+
+
+<div ng-controller="prescriptionController">
+    <div class="row" style="margin-top: 50px">
+        <div class="form-group col-xs-4">
+            <label for="PatientName">Name:</label>
+            <input type="text" class="form-control" placeholder="Insert name" ng-model="PatientName" />
+        </div>
+        <div class="form-group col-xs-2">
+            <label for="page">Age:</label>
+            <input type="text" class="form-control" placeholder="Age" ng-model="PatientAge" />
+        </div>
+        <div class="form-group col-xs-3">
+            <label for="pcontact">Contacts:</label>
+            <input type="text" class="form-control" placeholder="Contact No." ng-model="PatientContact" />
+        </div>
+        <div class="form-group col-xs-3" style="text-align:right">
+            <label for="pdate">Date:</label>
+            <label>{{date}}</label>
+            <input type='text' class="form-control datepicker" readonly="readonly" placeholder="Select next date of appointment" style="cursor:pointer" ng-model="Appointment" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="poralexam">Oral Examination:</label>
+        <textarea class="form-control" ng-model="OralExam"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="pmedhistory">Medical History:</label>
+        <textarea class="form-control" ng-model="MedHistory"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="pinvestigaton">Investigation:</label>
+        <textarea class="form-control" ng-model="Investigation"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="padvice">Advice:</label>
+        <textarea class="form-control" ng-model="Advice"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="ptreatment">Treatment</label>
+        <div class="row">
+            <div class="col-xs-12">
+                <select class="form-control" ng-model="selectedTreatment">
+                    <option ng-repeat="treatment in treatments" value="{{treatment.value}}">
+                        {{treatment.value}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <label>Teeth No.</label>
+        <div class="row">
+            <div class="col-xs-2" style="margin-top:8px">
+                Upper Right:
+            </div>
+            <div class="col-xs-7">
+                <label class="checkbox" ng-repeat="tooth in teethUR">
+                    <input type="checkbox" ng-model="tooth.checked" ng-change="upperRight()" /> {{tooth.id}}
+                </label>
+            </div>
+            <div class="col-xs-3">
+                <input type="text" ng-model="URSelected" class="form-control" readonly="readonly" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-2" style="margin-top:8px">
+                Upper Left:
+            </div>
+            <div class="col-xs-7">
+                <label class="checkbox" ng-repeat="tooth in teethUL">
+                    <input type="checkbox" ng-model="tooth.checked" ng-change="upperLeft()" /> {{tooth.id}}
+                </label>
+            </div>
+            <div class="col-xs-3">
+                <input type="text" ng-model="ULSelected" class="form-control" readonly="readonly" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-2" style="margin-top:8px">
+                Lower Right:
+            </div>
+            <div class="col-xs-7">
+                <label class="checkbox" ng-repeat="tooth in teethLR">
+                    <input type="checkbox" ng-model="tooth.checked" ng-change="lowerRight()" /> {{tooth.id}}
+                </label>
+            </div>
+            <div class="col-xs-3">
+                <input type="text" ng-model="LRSelected" class="form-control" readonly="readonly" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-2" style="margin-top:8px">
+                Lower Left:
+            </div>
+            <div class="col-xs-7">
+                <label class="checkbox" ng-repeat="tooth in teethLL">
+                    <input type="checkbox" ng-model="tooth.checked" ng-change="lowerLeft()" /> {{tooth.id}}
+                </label>
+            </div>
+            <div class="col-xs-3">
+                <input type="text" ng-model="LLSelected" class="form-control" readonly="readonly" />
+            </div>
+        </div>
+        <input type="button" class="btn-danger form-control" ng-click="addTreatmentDetails()" value="Add Treatment" /><br />
+        <textarea class="form-control" ng-model="Treatment" readonly="readonly"></textarea>
+    </div>
+    <h4>Total Consultation Charge</h4>
+    <div class="row">
+        <div class="form-group col-xs-3">
+            <label>Surgeon Charge</label>
+            <input type="text" class="form-control" ng-model="SurgeonCharge" />
+        </div>
+        <div class="form-group col-xs-3">
+            <label>Assisstant Charge</label>
+            <input type="text" class="form-control" ng-model="AssisstantCharge" />
+        </div>
+        <div class="form-group col-xs-3">
+            <label>OT Charge</label>
+            <input type="text" class="form-control" ng-model="OTCharge" />
+        </div>
+        <div class="form-group col-xs-3">
+            <label>Suction Tube</label>
+            <input type="text" class="form-control" ng-model="SuctionTube" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-xs-3">
+            <label>Gloves</label>
+            <input type="text" class="form-control" ng-model="Gloves" />
+        </div>
+        <div class="form-group col-xs-3">
+            <label>Sterilization Cost</label>
+            <input type="text" class="form-control" ng-model="SterilizationCost" />
+        </div>
+        <div class="form-group col-xs-3">
+            <label>Needle</label>
+            <input type="text" class="form-control" ng-model="Needle" />
+        </div>
+        <div class="form-group col-xs-3">
+            <label>Remar File</label>
+            <input type="text" class="form-control" ng-model="RemarFile" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-xs-3">
+            <label>Bar</label>
+            <input type="text" class="form-control" ng-model="Bar" />
+        </div>
+        <div class="form-group col-xs-3">
+            <label>Polishing Bar</label>
+            <input type="text" class="form-control" ng-model="PolishingBar" />
+        </div>
+        <div class="form-group col-xs-3">
+            <label>Polishing Paste</label>
+            <input type="text" class="form-control" ng-model="PolishingPaste" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <input type="button" class="form-control btn-success" value="Submit Prescription Data" ng-click="save()" />
+    </div>
+</div>

@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<div>
+    <div class="row">
+        <div class="col-xs-2">
+            <a href="/" class="btn btn-info form-control"><span class="glyphicon glyphicon-pencil"></span>  Smile Makers</a>
+        </div>
+        <div class="col-xs-2">
+            <a href="prescription/add" class="btn btn-danger form-control"><span class="glyphicon glyphicon-pencil"></span>  Write Prescription</a>
+        </div>
+        <div class="col-xs-2">
+            <a href="consultation/add" class="btn btn-success form-control"><span class="glyphicon glyphicon-plus"></span>  Add Consultation</a>
+        </div>
+    </div>
+    <div>
+        <div ng-view>
+        </div>
+    </div>
+</div>
