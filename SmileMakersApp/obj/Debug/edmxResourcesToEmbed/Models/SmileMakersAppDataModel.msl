@@ -4,6 +4,7 @@
     <EntitySetMapping Name="Consultations">
       <EntityTypeMapping TypeName="SmileMakersAppDataModel.Consultation">
         <MappingFragment StoreEntitySet="Consultation">
+          <ScalarProperty Name="next_date" ColumnName="next_date" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="prescription_id" ColumnName="prescription_id" />
           <ScalarProperty Name="consultation_date" ColumnName="consultation_date" />

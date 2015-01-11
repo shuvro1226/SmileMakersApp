@@ -31,8 +31,13 @@
         <div class="form-group col-xs-3" style="text-align:right">
             <label for="pdate">Date:</label>
             <label>{{date}}</label>
-            <input type='text' class="form-control datepicker" readonly="readonly" placeholder="Select next date of appointment" style="cursor:pointer" ng-model="Appointment" />
+            <input type='text' class="form-control datepicker" readonly placeholder="Select next date of appointment" style="cursor:pointer" ng-model="Appointment" />
         </div>
+    </div>
+
+    <div class="form-group">
+        <label for="nexttask">Next Task:</label>
+        <textarea class="form-control" ng-model="NextTask" ng-disabled="!Appointment"></textarea>
     </div>
 
     <div class="form-group">

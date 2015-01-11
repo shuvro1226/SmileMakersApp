@@ -56,6 +56,5 @@ c:\users\shuvro\documents\visual studio 2013\Projects\SmileMakersApp\SmileMakers
 c:\users\shuvro\documents\visual studio 2013\Projects\SmileMakersApp\SmileMakersApp\bin\Microsoft.Owin.Security.Google.xml
 c:\users\shuvro\documents\visual studio 2013\Projects\SmileMakersApp\SmileMakersApp\bin\Microsoft.Owin.Security.Twitter.xml
 c:\users\shuvro\documents\visual studio 2013\Projects\SmileMakersApp\SmileMakersApp\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-c:\users\shuvro\documents\visual studio 2013\Projects\SmileMakersApp\SmileMakersApp\obj\Debug\SmileMakersApp.csprojResolveAssemblyReference.cache
 c:\users\shuvro\documents\visual studio 2013\Projects\SmileMakersApp\SmileMakersApp\obj\Debug\SmileMakersApp.dll
 c:\users\shuvro\documents\visual studio 2013\Projects\SmileMakersApp\SmileMakersApp\obj\Debug\SmileMakersApp.pdb

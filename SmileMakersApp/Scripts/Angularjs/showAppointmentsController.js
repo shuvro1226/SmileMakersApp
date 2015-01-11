@@ -3,5 +3,10 @@
 
 app.controller("showAppointmentsController", function ($scope, prescriptionService) {
     console.log("Controller Accessed");
-    $scope.Prescription = prescriptionService.getPrescriptions();
+    var getPrescriptions = prescriptionService.getPrescriptions();
+    getPrescriptions.then(function (pl) { $scope.Prescription = pl.data },
+              function (errorPl) {
+                  $log.error('failure loading Employee', errorPl);
+              });
+    console.log($scope.Prescription);
 });

@@ -15,6 +15,7 @@
     <Property Name="lower_left" Type="varchar" MaxLength="50" />
     <Property Name="lower_right" Type="varchar" MaxLength="50" />
     <Property Name="next_task" Type="varchar" MaxLength="500" />
+    <Property Name="next_date" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Prescription">
     <Key>

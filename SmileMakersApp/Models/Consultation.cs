@@ -25,6 +25,7 @@ namespace SmileMakersApp.Models
         public string lower_left { get; set; }
         public string lower_right { get; set; }
         public string next_task { get; set; }
+        public string next_date { get; set; }
     
         public virtual Prescription Prescription { get; set; }
     }

@@ -169,7 +169,8 @@ app.controller("prescriptionController", function ($scope, $location, prescripti
 
 
     $scope.save = function () {
-        //var date = $('.datepicker').datepicker({ dateFormat: 'dd-mm-yy' }).val();
+        
+        alert($scope.NextTask);
         var Prescription = {
             patient_name: $scope.PatientName,
             patient_age: $scope.PatientAge,
@@ -181,6 +182,7 @@ app.controller("prescriptionController", function ($scope, $location, prescripti
             advice: $scope.Advice,
             treatment: $scope.Treatment,
             appointment: $scope.Appointment,
+            next_task: $scope.NextTask,
             surgeon_charge: $scope.SurgeonCharge,
             assisstant_charge: $scope.AssisstantCharge,
             ot_charge: $scope.OTCharge,

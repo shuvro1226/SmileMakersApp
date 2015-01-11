@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SmileMakersAppDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SmileMakersAppDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Consultation">
           <Key>
             <PropertyRef Name="id" />
@@ -20,6 +20,7 @@
           <Property Name="lower_left" Type="varchar" MaxLength="50" />
           <Property Name="lower_right" Type="varchar" MaxLength="50" />
           <Property Name="next_task" Type="varchar" MaxLength="500" />
+          <Property Name="next_date" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Prescription">
           <Key>
@@ -69,8 +70,7 @@
             <End Role="Consultation" EntitySet="Consultation" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SmileMakersAppDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -90,6 +90,7 @@
           <Property Name="lower_right" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="next_task" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Prescription" Relationship="Self.FK__Consultat__presc__1273C1CD" FromRole="Consultation" ToRole="Prescription" />
+          <Property Name="next_date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Prescription">
           <Key>
@@ -149,6 +150,7 @@
           <EntitySetMapping Name="Consultations">
             <EntityTypeMapping TypeName="SmileMakersAppDataModel.Consultation">
               <MappingFragment StoreEntitySet="Consultation">
+                <ScalarProperty Name="next_date" ColumnName="next_date" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="prescription_id" ColumnName="prescription_id" />
                 <ScalarProperty Name="consultation_date" ColumnName="consultation_date" />

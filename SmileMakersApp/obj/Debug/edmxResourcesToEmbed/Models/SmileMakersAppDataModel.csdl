@@ -16,6 +16,7 @@
     <Property Name="lower_right" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="next_task" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Prescription" Relationship="Self.FK__Consultat__presc__1273C1CD" FromRole="Consultation" ToRole="Prescription" />
+    <Property Name="next_date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Prescription">
     <Key>

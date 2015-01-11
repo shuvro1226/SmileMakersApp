@@ -76,8 +76,8 @@ app.controller("consultationController", function ($scope, consultationService) 
         var Consultation = {
             prescription_id: $scope.PresID,
             consultation_date: $scope.ConsultDate,
-            next_consulltation_date: $scope.NextConsultDate,
-            next_consultation_task: $scope.NextConsultWork,
+            next_date: $scope.NextConsultDate,
+            next_task: $scope.NextConsultWork,
             payment_recieved: $scope.AmountPaid,
             payment_left: $scope.AmountRemain,
             work_done: $scope.WorkDone,
