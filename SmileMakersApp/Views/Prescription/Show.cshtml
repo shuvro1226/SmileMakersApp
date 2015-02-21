@@ -1,0 +1,208 @@
+﻿<div ng-controller="showPrescriptionController">
+    <div class="row" ng-show="prescription != null">
+        <div class="col-xs-7">
+            <div class="list-group">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <h3 class="buxton-sketch">Patient's Detail</h3>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="panel-buttons">
+                            <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="showPatient(prescription.Patient[0].id)">
+                                <span class="glyphicon glyphicon-share" aria-hidden="true"></span>
+                            </button>
+                            <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="updatePatient(prescription.Patient[0].id)">
+                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-group-item">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <span class="glyphicon glyphicon-user"></span> {{prescription.Patient[0].name}}
+                        </div>
+                        <div class="col-xs-3">
+                            <span class="glyphicon glyphicon-calendar"></span> {{prescription.Patient[0].age}}&nbsp;years old
+                        </div>
+                        <div class="col-xs-3">
+                            <span class="glyphicon glyphicon-phone"></span> {{prescription.Patient[0].contact}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <span class="glyphicon glyphicon-map-marker"></span> {{prescription.Patient[0].address}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-group">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <h3 class="buxton-sketch">Prescribed Content</h3>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="panel-buttons">
+                            <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="printPrescription()">
+                                <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
+                            </button>
+                            <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="updatePrescription(prescription.id)">
+                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-group-item">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <label>Date:</label> {{prescription.prescription_date}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <label>Oral Examination:</label> {{prescription.oral_examination}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <label>Medical History:</label> {{prescription.medical_history}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <label>Investigation:</label> {{prescription.investigation}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <label>Advice:</label> {{prescription.advice}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-xs-6">
+                    <h3 class="buxton-sketch">Treatments</h3>
+                </div>
+                <div class="col-xs-6">
+                    <div class="panel-buttons">
+                        <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="updateTreatment(prescription.id)">
+                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row list-group">
+                <div class="col-xs-6 list-group-item" ng-repeat="treatments in prescription.PrescribedTreatments" style="margin:10px; width:calc(50% - 20px)">
+                    <label style="float:left; width:100%">{{treatments.name}}</label>
+                    <div style="width:210px; float:right">
+                        <span class="treatment-teeth" style="border-bottom:1px solid #333; border-right:1px solid #333; text-align:right">&nbsp;{{treatments.upper_left}}&nbsp;</span>
+                        <span class="treatment-teeth" style="border-bottom:1px solid #333">&nbsp;{{treatments.upper_right}}&nbsp;</span>
+                        <span class="treatment-teeth" style="border-right:1px solid #333; text-align:right">&nbsp;{{treatments.lower_left }}&nbsp;</span>
+                        <span class="treatment-teeth" style="">&nbsp;{{treatments.lower_right}}&nbsp;</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-group">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <h3 class="buxton-sketch">Total Costing</h3>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="panel-buttons">
+                            <button type="button" class="btn btn-default" ng-click="addCharges()">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-group-item">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <label>Surgeon Charge:</label> {{prescription.ConsultationCharges[0].surgeon_charge}}
+                        </div>
+                        <div class="col-xs-4">
+                            <label>Assisstant Charge:</label> {{prescription.ConsultationCharges[0].assisstant_charge}}
+                        </div>
+                        <div class="col-xs-4">
+                            <label>OT Charge:</label> {{prescription.ConsultationCharges[0].ot_charge}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <label>Suction Tube:</label> {{prescription.ConsultationCharges[0].suction_tube}}
+                        </div>
+                        <div class="col-xs-4">
+                            <label>Gloves:</label> {{prescription.ConsultationCharges[0].gloves}}
+                        </div>
+                        <div class="col-xs-4">
+                            <label>Strilization Cost:</label> {{prescription.ConsultationCharges[0].sterilization_cost}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <label>Needle:</label> {{prescription.ConsultationCharges[0].needle}}
+                        </div>
+                        <div class="col-xs-4">
+                            <label>Remar File:</label> {{prescription.ConsultationCharges[0].remar_file}}
+                        </div>
+                        <div class="col-xs-4">
+                            <label>Polishing Bar:</label> {{prescription.ConsultationCharges[0].polishing_bar}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <label>Polishing Paste:</label> {{prescription.ConsultationCharges[0].polishing_paste}}
+                        </div>
+                        <div class="col-xs-4">
+                            <label>Bar:</label> {{prescription.ConsultationCharges[0].bar}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-5">
+            <div class="row">
+                <div class="col-xs-6">
+                    <h3 class="buxton-sketch">Consultations</h3>
+                </div>
+                <div class="col-xs-6">
+                    <div style="position:absolute; right:-5px">
+                        <button type="button" class="btn btn-default panel-buttons" aria-label="Left Align" ng-click="addConsultation()">
+                            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                </div>
+            </div><br />
+            <div ng-repeat="consultation in prescription.Consultations">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <label>{{consultation.consultation_date}}</label>
+                    </div>
+                    <div class="col-xs-6">
+                        <div style="position:absolute; right:10px; top:-5px">
+                            <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="updateConsultation(consultation.id)">
+                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row list-group" ng-repeat="treatmentDetail in consultation.ConsultedTreatments">
+                    <div class="col-xs-12 list-group-item" style="float:left; margin:10px; width:calc(100% - 20px)">
+                        <label style="float:left; width:100%">{{treatmentDetail.name}}</label>
+                        <div style="width:210px; float:right">
+                            <span class="treatment-teeth" style="border-bottom: 1px solid #333; border-right: 1px solid #333; text-align: right">&nbsp;{{treatmentDetail.upper_left}}&nbsp;</span>
+                            <span class="treatment-teeth" style="border-bottom: 1px solid #333">&nbsp;{{treatmentDetail.upper_right}}&nbsp;</span>
+                            <span class="treatment-teeth" style="border-right: 1px solid #333; text-align: right">&nbsp;{{treatmentDetail.lower_left }}&nbsp;</span>
+                            <span class="treatment-teeth">&nbsp;{{treatmentDetail.lower_right}}&nbsp;</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,33 +1,35 @@
-﻿@{
-    ViewBag.Title = "Home Page";
-}
+﻿<div ng-controller="showAppointmentsController">
+    <div class="row">
+        <div class="col-md-6">
 
-<script type="text/javascript">
-    $(function () {
-        $(".datepicker").datepicker({
-            numberOfMonths: 3,
-            dateFormat: "dd-mm-yy",
-            showButtonPanel: true
-        });
-    });
-</script>
-
-<div ng-controller="showAppointmentsController">
-    <div style="margin-top: 50px">
-        <input type='text' class="form-control datepicker" readonly="readonly" placeholder="Select date" style="cursor:pointer" ng-model="date" ng-change="dateChanged()" />
-        <table class="table table-bordered">
-            <tr>
-                <th>Time</th>
-                <th>Patient's Name</th>
-                <th>Scheduled Task</th>
-                <th>Contact No.</th>
-            </tr>
-            <tr ng-repeat="appointment in appointments">
-                <td>{{appointment.Time}}</td>
-                <td>{{appointment.Name}}</td>
-                <td>{{appointment.Task}}</td>
-                <td>{{appointment.Contact}}</td>
-            </tr>
-        </table>
+        </div>
+        <div class="col-md-6">
+            <div style="float:right; width:366px">
+                <p class="input-group">
+                    <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="date" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" ng-change="dateChanged()" />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </p>
+            </div>                
+        </div>
     </div>
+    <!--input type='text' class="form-control datepicker" readonly="readonly" placeholder="Select date" style="cursor:pointer" ng-model="date" ng-change="dateChanged()" /-->
+    <table class="table table-bordered table-hover" ng-show="AppointmentFound">
+        <tr>
+            <th><h4 class="buxton-sketch">Time</h4></th>
+            <th><h4 class="buxton-sketch">Appointed on</h4></th>
+            <th><h4 class="buxton-sketch">Patient's name</h4></th>
+            <th><h4 class="buxton-sketch">Contact no.</h4></th>
+            <th><h4 class="buxton-sketch">Scheduled task</h4></th>
+        </tr>
+        <tr ng-repeat="appointment in appointments | orderBy:'-FilterTime':true" ng-click="updateAppointment(appointment.ID)">
+            <td>{{appointment.Time}}</td>
+            <td>{{appointment.AppointmentFixed}}</td>
+            <td>{{appointment.Name}}</td>
+            <td>{{appointment.Contact}}</td>
+            <td>{{appointment.Task}}</td>
+        </tr>
+    </table>
+    <h3 class="buxton-sketch" ng-show="!AppointmentFound">You have no patients appointed on {{selectedDate}}.</h3>
 </div>

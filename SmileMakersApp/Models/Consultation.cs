@@ -14,20 +14,17 @@ namespace SmileMakersApp.Models
     
     public partial class Consultation
     {
+        public Consultation()
+        {
+            this.ConsultedTreatments = new HashSet<ConsultedTreatment>();
+        }
+    
         public int id { get; set; }
         public Nullable<int> prescription_id { get; set; }
         public string consultation_date { get; set; }
         public Nullable<int> payment_recieved { get; set; }
-        public Nullable<int> payment_left { get; set; }
-        public string work_done { get; set; }
-        public string upper_left { get; set; }
-        public string upper_right { get; set; }
-        public string lower_left { get; set; }
-        public string lower_right { get; set; }
-        public string next_task { get; set; }
-        public string next_date { get; set; }
-        public string next_time { get; set; }
     
         public virtual Prescription Prescription { get; set; }
+        public virtual ICollection<ConsultedTreatment> ConsultedTreatments { get; set; }
     }
 }

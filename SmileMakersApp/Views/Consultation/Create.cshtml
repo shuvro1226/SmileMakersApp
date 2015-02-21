@@ -24,120 +24,34 @@
 </script>
 
 <div class="" ng-controller="consultationController">
-    <div class="row" style="margin-top: 50px">
-        <div class="col-xs-2">
-            <div class="form-group">
-                <label for="">Prescription ID</label>
-                <input type='text' class="form-control" placeholder="Insert ID" ng-model="PresID" />
+    <div>
+        <div class="row" style="margin: 30px 0px">
+            <div class="col-xs-12 text-center">
+                <h3 ng-show="!Update" class="buxton-sketch">Add new consultation</h3>
+                <h3 ng-show="Update" class="buxton-sketch">Update consultation</h3>
             </div>
         </div>
-        <div class="col-xs-2">
-            <div class="form-group">
-                <label for="">Date</label>
-                <input type='text' class="form-control datepicker" readonly="readonly" placeholder="Select date" style="cursor:pointer" ng-model="ConsultDate" />
+        <div class="row">
+            <div class="col-xs-4 center-block">
+                <p class="input-group">
+                    <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="ConsultDate" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" placeholder="Coonsultation date" readonly />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </p>
+                <input type="text" class="form-control" placeholder="Amount paid" ng-model="AmountPaid" /><br />
             </div>
         </div>
-        <div class="col-xs-2">
-            <div class="form-group">
-                <label for="">Next Date</label>
-                <input type='text' class="form-control datepicker" readonly="readonly" placeholder="Select date" style="cursor:pointer" ng-model="NextConsultDate" />
-            </div>
-        </div>
-        <div class="form-group col-xs-2">
-            <label for="pdate">Next Time:</label>
-            <div class="input-group clockpicker">
-                <input type="text" class="form-control" ng-model="NextConsultTime" readonly>
-                <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-time"></span>
-                </span>
-            </div>
-        </div>
-        <div class="col-xs-4">
-            <div class="form-group">
-                <label for="">Next Task</label>
-                <input type='text' class="form-control" placeholder="Work going to be done" ng-model="NextConsultWork" ng-disabled="!NextConsultDate || !NextConsultTime" />
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-xs-8">
-            <div class="form-group">
-                <label for="">Work Done</label>
-                <input type="text" class="form-control" placeholder="Work done today" ng-model="WorkDone" />
-            </div>
-        </div>
-        <div class="col-xs-4">
-            <div class="form-group">
-                <label for="">Payment</label>
+        <div class="row">
+            <div class="col-xs-4 center-block">
                 <div class="row">
-                    <div class="col-xs-6">
-                        <input type="text" class="form-control" placeholder="Amount Paid" ng-model="AmountPaid" />
-                    </div>
-                    <div class="col-xs-6">
-                        <input type="text" class="form-control col-md-6" placeholder="Amount Remaining" ng-model="AmountRemain">
+                    <div class="col-xs-7">
+                        <input type="button" class="btn btn-success" value="Save consultation and add treatments" ng-click="save()" ng-show="!Update" />
+                        <input type="button" class="btn btn-success" value="Update consultation and add treatments" ng-click="update()" ng-show="Update" />
                     </div>
                 </div>
-            </div>
+            </div>            
         </div>
     </div>
 
-    <div class="form-group">
-        <label>Teeth No.</label>
-        <div class="row">
-            <div class="col-md-2" style="margin-top:8px">
-                Upper Right:
-            </div>
-            <div class="col-md-7">
-                <label class="checkbox" ng-repeat="tooth in teethUR">
-                    <input type="checkbox" ng-model="tooth.checked" ng-change="upperRight()" /> {{tooth.id}}
-                </label>
-            </div>
-            <div class="col-md-3">
-                <input type="text" ng-model="URSelected" class="form-control" readonly="readonly" />
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-2" style="margin-top:8px">
-                Upper Left:
-            </div>
-            <div class="col-md-7">
-                <label class="checkbox" ng-repeat="tooth in teethUL">
-                    <input type="checkbox" ng-model="tooth.checked" ng-change="upperLeft()" /> {{tooth.id}}
-                </label>
-            </div>
-            <div class="col-md-3">
-                <input type="text" ng-model="ULSelected" class="form-control" readonly="readonly" />
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-2" style="margin-top:8px">
-                Lower Right:
-            </div>
-            <div class="col-md-7">
-                <label class="checkbox" ng-repeat="tooth in teethLR">
-                    <input type="checkbox" ng-model="tooth.checked" ng-change="lowerRight()" /> {{tooth.id}}
-                </label>
-            </div>
-            <div class="col-md-3">
-                <input type="text" ng-model="LRSelected" class="form-control" readonly="readonly" />
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-2" style="margin-top:8px">
-                Lower Left:
-            </div>
-            <div class="col-md-7">
-                <label class="checkbox" ng-repeat="tooth in teethLL">
-                    <input type="checkbox" ng-model="tooth.checked" ng-change="lowerLeft()" /> {{tooth.id}}
-                </label>
-            </div>
-            <div class="col-md-3">
-                <input type="text" ng-model="LLSelected" class="form-control" readonly="readonly" />
-            </div>
-        </div>
-    </div>
-    <div class="form-group">
-        <input type="button" class="form-control btn-success" value="Add Consultation Detail" ng-click="save()" />
-    </div>
 </div>

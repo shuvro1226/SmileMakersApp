@@ -1,0 +1,29 @@
+﻿<div ng-controller="patientController">
+    <div class="row" style="margin: 30px 0px">
+        <div class="col-xs-12 text-center">
+            <h3 ng-show="!Update" class="buxton-sketch">Add patient details</h3>
+            <h3 ng-show="Update" class="buxton-sketch">Update existing patient details</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-3"></div>
+        <div class="col-xs-6">
+            <input type="text" class="form-control" placeholder="Name" ng-model="PatientName" /><br />
+            <div class="row">
+                <div class="col-xs-3">
+                    <input type="text" class="form-control" placeholder="Age" ng-model="PatientAge" />
+                </div>
+                <div class="col-xs-9">
+                    <input type="text" class="form-control" placeholder="Contact No." ng-model="PatientContact" />
+                </div>
+            </div><br />   
+            <textarea class="form-control" ng-model="PatientAddress" placeholder="Address"></textarea><br /><br />
+            <input type="button" class="btn btn-success" value="Add patient" ng-click="save()" ng-show="!Update" />
+            <input type="button" class="btn btn-success" value="Update patient" ng-click="update()" ng-show="Update" />
+            <input type="button" class="btn btn-success" value="Save patient and add appointment" ng-click="saveAndAdd()" ng-show="!Update" />
+            <input type="button" class="btn btn-success" value="Update patient and add appointment" ng-click="updateAndAdd()" ng-show="Update" />
+        </div>
+        <div class="col-xs-3"></div>
+    </div>
+</div>
+

@@ -25,6 +25,12 @@ namespace SmileMakersApp.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<ConsultationCharge> ConsultationCharges { get; set; }
+        public virtual DbSet<ConsultedTreatment> ConsultedTreatments { get; set; }
+        public virtual DbSet<Patient> Patients { get; set; }
+        public virtual DbSet<PrescribedTreatment> PrescribedTreatments { get; set; }
+        public virtual DbSet<Treatment> Treatments { get; set; }
+        public virtual DbSet<Appointment> Appointments { get; set; }
         public virtual DbSet<Consultation> Consultations { get; set; }
         public virtual DbSet<Prescription> Prescriptions { get; set; }
     }

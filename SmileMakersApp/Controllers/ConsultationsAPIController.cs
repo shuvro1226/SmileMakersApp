@@ -12,30 +12,33 @@ using SmileMakersApp.Models;
 
 namespace SmileMakersApp.Controllers
 {
-    public class ConsultationAPIController : ApiController
+    public class ConsultationsAPIController : ApiController
     {
         private SmileMakersAppDataEntities db = new SmileMakersAppDataEntities();
 
-        // GET api/ConsultationAPI
+        // GET api/ConsultationsAPI
         public IQueryable<Consultation> GetConsultations()
         {
             return db.Consultations;
         }
 
-        // GET api/ConsultationAPI/5
+        // GET api/ConsultationsAPI/5
         [ResponseType(typeof(Consultation))]
         public IHttpActionResult GetConsultation(int id)
         {
-            Consultation consultation = db.Consultations.Find(id);
-            if (consultation == null)
-            {
-                return NotFound();
-            }
+            var consultationDetails = from consultation in db.Consultations
+                                      where consultation.id == id
+                                      select new 
+                                      {
+                                          consultation.id,
+                                          consultation.consultation_date,
+                                          consultation.payment_recieved
+                                      };
 
-            return Ok(consultation);
+            return Ok(consultationDetails);
         }
 
-        // PUT api/ConsultationAPI/5
+        // PUT api/ConsultationsAPI/5
         public IHttpActionResult PutConsultation(int id, Consultation consultation)
         {
             if (!ModelState.IsValid)
@@ -69,7 +72,7 @@ namespace SmileMakersApp.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST api/ConsultationAPI
+        // POST api/ConsultationsAPI
         [ResponseType(typeof(Consultation))]
         public IHttpActionResult PostConsultation(Consultation consultation)
         {
@@ -84,7 +87,7 @@ namespace SmileMakersApp.Controllers
             return CreatedAtRoute("DefaultApi", new { id = consultation.id }, consultation);
         }
 
-        // DELETE api/ConsultationAPI/5
+        // DELETE api/ConsultationsAPI/5
         [ResponseType(typeof(Consultation))]
         public IHttpActionResult DeleteConsultation(int id)
         {

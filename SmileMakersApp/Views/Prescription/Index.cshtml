@@ -1,21 +1,61 @@
-﻿@{
-    ViewBag.Title = "Index";
-}
+﻿<script type="text/javascript">
+    $(document).ready(function () {
+        $("button.menu-buttons").click(function () {
+            $(this).parent().toggleClass("open");
+        });
 
-<div>
-    <div class="row">
-        <div class="col-xs-2">
-            <a href="/" class="btn btn-info form-control"><span class="glyphicon glyphicon-pencil"></span>  Smile Makers</a>
+        $("body").click(function (e) {
+            if (!$('#search-container').is(e.target) && $('#search-container').has(e.target).length === 0 && $('.open').has(e.target).length === 0) {
+                $('#search-container').removeClass('open');
+            }
+        });
+    });
+</script>
+
+<div id="pdf2html">
+    <div class="row" ng-controller="headerController">
+        <div class="col-xs-6" style="height:50px; margin: 20px 0">
+            <img src="images/icon.png" width="36" height="44" style="float:left" />
+            <h1 class="buxton-sketch" style="font-size: 48px; float:left; margin: 0 20px">Smile Makers Dental Clinic</h1>
         </div>
-        <div class="col-xs-2">
-            <a href="prescription/add" class="btn btn-danger form-control"><span class="glyphicon glyphicon-pencil"></span>  Write Prescription</a>
-        </div>
-        <div class="col-xs-2">
-            <a href="consultation/add" class="btn btn-success form-control"><span class="glyphicon glyphicon-plus"></span>  Add Consultation</a>
+        <div class="col-xs-6">
+            <div style="float:right">
+                <a href="/" class="btn btn-primary menu-buttons"><span aria-hidden="true" class="glyphicon glyphicon-home" style="top: calc(100% - 40px)"></span></a>
+                <a href="patient/add/0" class="btn btn-danger menu-buttons"><span class="glyphicon glyphicon-user" style="top: calc(100% - 40px)"></span></a>
+                <a href="appointment/0" class="btn btn-success menu-buttons"><span class="glyphicon glyphicon-th-list" style="top: calc(100% - 40px)"></span></a>
+                <a href="prescription/add/0" class="btn btn-warning menu-buttons"><span class="glyphicon glyphicon-pencil" style="top: calc(100% - 40px)"></span></a>
+                <div id="search-container" class="btn-group">
+                    <button type="button" class="btn btn-info menu-buttons">
+                        <span class="glyphicon glyphicon-search"></span>&nbsp;<span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" style="left:auto; right: 0; width: 366px" role="menu">
+                        <li>
+                            <div class="input-group" style="padding:5px">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                                <input type="text" class="form-control" ng-model="PatientContact" placeholder="Search for patient">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button" ng-click="showPatient()"><span class="glyphicon glyphicon-search"></span></button>
+                                </span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="input-group" style="padding:5px">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-list-alt"></span></span>
+                                <input type="text" class="form-control" ng-model="PrescriptionID" placeholder="Search for prescription">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button" ng-click="showPrescription()"><span class="glyphicon glyphicon-search"></span></button>
+                                </span>
+                            </div>
+                        </li>
+                        <!--li><a href="patient/0"><span class="glyphicon glyphicon-user"></span>  Search Patient</a></!--li>
+                        <li><a href="prescription/0"><span class="glyphicon glyphicon-list-alt"></span>  Search Prescription</a></li-->
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
-    <div>
-        <div ng-view>
+    <div class="row">
+        <div class="col-xs-12" ng-view>
         </div>
     </div>
 </div>

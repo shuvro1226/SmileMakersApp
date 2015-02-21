@@ -173,20 +173,44 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\ConsultationAPIController.cs" />
+    <Compile Include="Controllers\AppointmentsAPIController.cs" />
+    <Compile Include="Controllers\AppointmentsController.cs" />
+    <Compile Include="Controllers\ConsultationChargeAPIController.cs" />
+    <Compile Include="Controllers\ConsultationChargesController.cs" />
     <Compile Include="Controllers\ConsultationController.cs" />
+    <Compile Include="Controllers\ConsultationsAPIController.cs" />
+    <Compile Include="Controllers\ConsultedTreatmentsAPIController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\PrescriptionAPIController.cs" />
+    <Compile Include="Controllers\PatientsAPIController.cs" />
+    <Compile Include="Controllers\PatientsController.cs" />
+    <Compile Include="Controllers\PrescribedTreatmentsAPIController.cs" />
     <Compile Include="Controllers\PrescriptionController.cs" />
+    <Compile Include="Controllers\PrescriptionsAPIController.cs" />
+    <Compile Include="Controllers\TreatmentsAPIController.cs" />
+    <Compile Include="Controllers\TreatmentsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Appointment.cs">
+      <DependentUpon>SmileMakersAppDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Consultation.cs">
       <DependentUpon>SmileMakersAppDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ConsultationCharge.cs">
+      <DependentUpon>SmileMakersAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ConsultedTreatment.cs">
+      <DependentUpon>SmileMakersAppDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Patient.cs">
+      <DependentUpon>SmileMakersAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PrescribedTreatment.cs">
+      <DependentUpon>SmileMakersAppDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Prescription.cs">
       <DependentUpon>SmileMakersAppDataModel.tt</DependentUpon>
     </Compile>
@@ -204,6 +228,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SmileMakersAppDataModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Treatment.cs">
+      <DependentUpon>SmileMakersAppDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -253,19 +280,30 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\icon.jpg" />
+    <Content Include="images\icon.png" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular-route.js" />
     <Content Include="Scripts\angular-route.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\Angularjs\addChargesController.js" />
+    <Content Include="Scripts\Angularjs\appointmentController.js" />
     <Content Include="Scripts\Angularjs\consultationController.js" />
+    <Content Include="Scripts\Angularjs\icon.jpg" />
     <Content Include="Scripts\Angularjs\module.js" />
+    <Content Include="Scripts\Angularjs\patientController.js" />
     <Content Include="Scripts\Angularjs\prescriptionController.js" />
+    <Content Include="Scripts\Angularjs\headerController.js" />
     <Content Include="Scripts\Angularjs\services.js" />
     <Content Include="Scripts\Angularjs\showAppointmentsController.js" />
+    <Content Include="Scripts\Angularjs\showPrescriptionController.js" />
+    <Content Include="Scripts\Angularjs\treatmentsController.js" />
     <Content Include="Scripts\bootstrap-clockpicker.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\angular.min.js.map" />
+    <Content Include="Scripts\angular-route.min.js.map" />
     <EntityDeploy Include="Models\SmileMakersAppDataModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>SmileMakersAppDataModel.Designer.cs</LastGenOutput>
@@ -283,8 +321,6 @@
       <DependentUpon>SmileMakersAppDataModel.edmx</DependentUpon>
       <LastGenOutput>SmileMakersAppDataModel.cs</LastGenOutput>
     </Content>
-    <Content Include="Scripts\angular.min.js.map" />
-    <Content Include="Scripts\angular-route.min.js.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -295,13 +331,26 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jspdf\icon.jpg" />
+    <Content Include="Scripts\jspdf\jspdf.js" />
+    <Content Include="Scripts\jspdf\jspdf.plugin.addimage.js" />
+    <Content Include="Scripts\jspdf\jspdf.plugin.cell.js" />
+    <Content Include="Scripts\jspdf\jspdf.plugin.from_html.js" />
+    <Content Include="Scripts\jspdf\jspdf.plugin.ie_below_9_shim.js" />
+    <Content Include="Scripts\jspdf\jspdf.plugin.javascript.js" />
+    <Content Include="Scripts\jspdf\jspdf.plugin.sillysvgrenderer.js" />
+    <Content Include="Scripts\jspdf\jspdf.plugin.split_text_to_size.js" />
+    <Content Include="Scripts\jspdf\jspdf.plugin.standard_fonts_metrics.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\PDFMake\icon.jpg" />
     <Content Include="Scripts\PDFMake\pdfmake.min.js" />
     <Content Include="Scripts\PDFMake\vfs_fonts.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -330,6 +379,12 @@
     <Content Include="Views\Consultation\Create.cshtml" />
     <Content Include="Views\Prescription\Index.cshtml" />
     <Content Include="Views\Prescription\Create.cshtml" />
+    <Content Include="Views\Patients\Create.cshtml" />
+    <Content Include="Views\Prescription\Show.cshtml" />
+    <Content Include="Views\ConsultationCharges\Create.cshtml" />
+    <Content Include="Views\Treatments\Create.cshtml" />
+    <Content Include="Views\Patients\Index.cshtml" />
+    <Content Include="Views\Appointments\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -4,10 +4,23 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b072ed004409439faa9542ef9bfae894" Name="Diagram1" ZoomLevel="61">
-        <EntityTypeShape EntityType="SmileMakersAppDataModel.Consultation" Width="1.5" PointX="3" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="SmileMakersAppDataModel.Prescription" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
-        <AssociationConnector Association="SmileMakersAppDataModel.FK__Consultat__presc__1273C1CD" ManuallyRouted="false" />
+      <Diagram DiagramId="73eee92f726d4a9e8421503bd63251d8" Name="Diagram1">
+        <EntityTypeShape EntityType="SmileMakersAppDataModel.ConsultationCharge" Width="1.5" PointX="3.875" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmileMakersAppDataModel.ConsultedTreatment" Width="1.5" PointX="7.5" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmileMakersAppDataModel.Patient" Width="1.5" PointX="0.75" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmileMakersAppDataModel.PrescribedTreatment" Width="1.5" PointX="8.25" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmileMakersAppDataModel.Treatment" Width="1.5" PointX="1.375" PointY="0.625" IsExpanded="true" />
+        <AssociationConnector Association="SmileMakersAppDataModel.FK__Consulted__treat__09A971A2" ManuallyRouted="false" />
+        <AssociationConnector Association="SmileMakersAppDataModel.FK__Prescribe__treat__05D8E0BE" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="SmileMakersAppDataModel.Appointment" Width="1.5" PointX="3" PointY="11.375" />
+        <AssociationConnector Association="SmileMakersAppDataModel.FK__Appointme__patie__3C34F16F" />
+        <EntityTypeShape EntityType="SmileMakersAppDataModel.Consultation" Width="1.5" PointX="5.25" PointY="15.25" />
+        <EntityTypeShape EntityType="SmileMakersAppDataModel.Prescription" Width="1.5" PointX="3" PointY="15.125" />
+        <AssociationConnector Association="SmileMakersAppDataModel.FK__Consultat__presc__160F4887" />
+        <AssociationConnector Association="SmileMakersAppDataModel.FK__Consultat__presc__74AE54BC" />
+        <AssociationConnector Association="SmileMakersAppDataModel.FK__Consulted__consu__08B54D69" />
+        <AssociationConnector Association="SmileMakersAppDataModel.FK__Prescript__patie__71D1E811" />
+        <AssociationConnector Association="SmileMakersAppDataModel.FK__Prescribe__presc__04E4BC85" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

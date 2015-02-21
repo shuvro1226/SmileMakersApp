@@ -1,6 +1,21 @@
-﻿body {
+﻿@font-face {
+	font-family: 'BuxtonSketch';
+	src: url('./fonts/BuxtonSketch.eot');
+	src: local('BuxtonSketch'), url('./fonts/BuxtonSketch.woff') format('woff'), url('./fonts/BuxtonSketch.ttf') format('truetype');
+}
+                
+.buxton-sketch {
+	font-family: 'BuxtonSketch' !important;
+}
+
+html {
+    width: 100%; height: 100%;
+}
+
+body {
     padding-top: 50px;
     padding-bottom: 20px;
+    width: 100%; height: 100%;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -39,4 +54,25 @@ input[type="checkbox"].input-validation-error {
 
 .validation-summary-valid {
     display: none;
+}
+
+.menu-buttons {
+    font-size: 20px;
+    height: 70px;
+    width: 70px;
+}
+
+.panel-buttons {
+    position:absolute; top:15px; right:15px; z-index:100;
+}
+
+.center-block {
+    float: none !important;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.treatment-teeth {
+    float:left;
+    width:100px;
 }

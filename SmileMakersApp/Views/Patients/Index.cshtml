@@ -1,0 +1,61 @@
+﻿<div ng-controller="patientController">
+    <div class="row">
+        <div class="col-xs-5">
+            <h3 class="buxton-sketch">{{PatientStatus}}</h3>
+            <div ng-repeat="patient in patientDetails">
+                <div class="list-group">
+                    <div class="list-group-item">
+                        <div class="panel-buttons">
+                            <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="showPrescriptions(patient.id, patient.name)">
+                                <span class="glyphicon glyphicon-share" aria-hidden="true"></span>
+                            </button>
+                            <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="updatePatient(patient.id)">
+                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <span class="glyphicon glyphicon-user"></span> {{patient.name}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <span class="glyphicon glyphicon-calendar"></span> {{patient.age}} years old
+                            </div>
+                            <div class="col-xs-8">
+                                <span class="glyphicon glyphicon-phone"></span> {{patient.contact}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <span class="glyphicon glyphicon-map-marker"></span> {{patient.address}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-7" ng-show="PatientSelected">
+            <h3 class="buxton-sketch">Treatment history for patient {{Name}}</h3>
+            <div class="list-group">
+                <div class="list-group-item" ng-repeat="prescription in patientPrescriptions">
+                    <div class="row">
+                        <div class="panel-buttons">
+                            <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="showPrescription(prescription.id)">
+                                <span class="glyphicon glyphicon-share" aria-hidden="true"></span>
+                            </button>
+                            <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="updatePrescription(prescription.id)">
+                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                        <div class="col-xs-3">
+                            <span class="glyphicon glyphicon-calendar"></span> {{prescription.prescription_date}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>    
+
+        

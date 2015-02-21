@@ -1,93 +1,105 @@
 ﻿/// <reference path="../angular.js" />
 /// <reference path="module.js" />
 
-app.controller("consultationController", function ($scope, consultationService) {
+app.controller("consultationController", function ($scope, $routeParams, $location, consultationService, treatmentService) {
+    var id = $routeParams.id;
+    var prescriptionID = $routeParams.pid;
 
-    var d = new Date();
-    var year = d.getFullYear();
-    var month = d.getMonth() + 1;
-    if (month < 10) {
-        month = "0" + month;
+    if (id === '0') {
+        $scope.Update = false;
+        var d = new Date();
+        var year = d.getFullYear();
+        var month = d.getMonth() + 1;
+        if (month < 10) {
+            month = "0" + month;
+        };
+        var day = d.getDate();
+        if (day < 10) {
+            day = "0" + day;
+        };
+        var date = day + "-" + month + "-" + year;
+    } else {
+        $scope.Update = true;
+        var getConsultation = consultationService.getConsultation(id);
+        getConsultation.then(function (pl) {
+            $scope.consultation = pl.data[0];
+            $scope.ConsultDate = $scope.consultation.consultation_date;
+            $scope.AmountPaid = $scope.consultation.payment_recieved;
+        }, function (errorPl) {
+            $log.error('Error loading prescription data', errorPl);
+        });
+    }
+
+    $scope.open = function ($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+
+        $scope.opened = true;
     };
-    var day = d.getDate();
-    if (day < 10) {
-        day = "0" + day;
+    $scope.dateOptions = {
+        formatDate: 'dd-MM-yyyy'
     };
-    $scope.ConsultDate = day + "-" + month + "-" + year;
-    
-    $scope.teethUR = [{ id: 1, checked: false }, { id: 2, checked: false }, { id: 3, checked: false }, { id: 4, checked: false }, { id: 5, checked: false }, { id: 6, checked: false }, { id: 7, checked: false }, { id: 8, checked: false }];
-    $scope.upperRight = function () {
-        $scope.URSelected = "";
-        for (var i = 0; i < $scope.teethUR.length; i++) {
-            if ($scope.teethUR[i].checked == true) {
-                if ($scope.URSelected == "") {
-                    $scope.URSelected = $scope.teethUR[i].id;
-                } else {
-                    $scope.URSelected = $scope.URSelected + "," + $scope.teethUR[i].id;
-                }
-            }
-        }
-    }
-
-    $scope.teethUL = [{ id: 1, checked: false }, { id: 2, checked: false }, { id: 3, checked: false }, { id: 4, checked: false }, { id: 5, checked: false }, { id: 6, checked: false }, { id: 7, checked: false }, { id: 8, checked: false }];
-    $scope.upperLeft = function () {
-        $scope.ULSelected = "";
-        for (var i = 0; i < $scope.teethUL.length; i++) {
-            if ($scope.teethUL[i].checked == true) {
-                if ($scope.ULSelected == "") {
-                    $scope.ULSelected = $scope.teethUL[i].id;
-                } else {
-                    $scope.ULSelected = $scope.ULSelected + "," + $scope.teethUL[i].id;
-                }
-            }
-        }
-    }
-
-    $scope.teethLR = [{ id: 1, checked: false }, { id: 2, checked: false }, { id: 3, checked: false }, { id: 4, checked: false }, { id: 5, checked: false }, { id: 6, checked: false }, { id: 7, checked: false }, { id: 8, checked: false }];
-    $scope.lowerRight = function () {
-        $scope.LRSelected = "";
-        for (var i = 0; i < $scope.teethLR.length; i++) {
-            if ($scope.teethLR[i].checked == true) {
-                if ($scope.LRSelected == "") {
-                    $scope.LRSelected = $scope.teethLR[i].id;
-                } else {
-                    $scope.LRSelected = $scope.LRSelected + "," + $scope.teethLR[i].id;
-                }
-            }
-        }
-    }
-
-    $scope.teethLL = [{ id: 1, checked: false }, { id: 2, checked: false }, { id: 3, checked: false }, { id: 4, checked: false }, { id: 5, checked: false }, { id: 6, checked: false }, { id: 7, checked: false }, { id: 8, checked: false }];
-    $scope.lowerLeft = function () {
-        $scope.LLSelected = "";
-        for (var i = 0; i < $scope.teethLL.length; i++) {
-            if ($scope.teethLL[i].checked == true) {
-                if ($scope.LLSelected == "") {
-                    $scope.LLSelected = $scope.teethLL[i].id;
-                } else {
-                    $scope.LLSelected = $scope.LLSelected + "," + $scope.teethLL[i].id;
-                }
-            }
-        }
-    }
+    $scope.format = 'dd-MM-yyyy';
 
     $scope.save = function () {
-        //var date = $('.datepicker').datepicker({ dateFormat: 'dd-mm-yy' }).val();
+        if (typeof ($scope.ConsultDate) === "string" || $scope.ConsultDate instanceof String) {
+            var saveDate = $scope.ConsultDate;
+        } else {
+            if (($scope.ConsultDate.getMonth() + 1) < 10 && $scope.ConsultDate.getDate() < 10) {
+                var saveDate = "0" + $scope.ConsultDate.getDate() + "-0" + ($scope.ConsultDate.getMonth() + 1) + "-" + $scope.ConsultDate.getFullYear();
+            } else if (($scope.ConsultDate.getMonth() + 1) < 10 && $scope.ConsultDate.getDate() >= 10) {
+                var saveDate = $scope.ConsultDate.getDate() + "-0" + ($scope.ConsultDate.getMonth() + 1) + "-" + $scope.ConsultDate.getFullYear();
+            } else if (($scope.ConsultDate.getMonth() + 1) >= 10 && $scope.ConsultDate.getDate() < 10) {
+                var saveDate = "0" + $scope.ConsultDate.getDate() + "-" + ($scope.ConsultDate.getMonth() + 1) + "-" + $scope.ConsultDate.getFullYear();
+            } else {
+                var saveDate = $scope.ConsultDate.getDate() + "-" + ($scope.ConsultDate.getMonth() + 1) + "-" + $scope.ConsultDate.getFullYear();
+            }
+        }
+
         var Consultation = {
-            prescription_id: $scope.PresID,
-            consultation_date: $scope.ConsultDate,
-            next_date: $scope.NextConsultDate,
-            next_time: $scope.NextConsultTime,
-            next_task: $scope.NextConsultWork,
-            payment_recieved: $scope.AmountPaid,
-            payment_left: $scope.AmountRemain,
-            work_done: $scope.WorkDone,
-            upper_left: $scope.ULSelected,
-            upper_right: $scope.URSelected,
-            lower_left: $scope.LLSelected,
-            lower_right: $scope.LRSelected
+            prescription_id: prescriptionID,
+            consultation_date: saveDate,
+            payment_recieved: $scope.AmountPaid
         };
         
-        consultationService.post(Consultation);
+        
+        var consultationResponse = consultationService.post(Consultation);
+        consultationResponse.then(function (pl) {
+            $scope.consultationid = pl.data.id;
+            $location.path('/treatments/consultation/' + $scope.consultationid + '/prescription/' + prescriptionID);
+        }, function (err) {
+            console.log("Err" + err);
+        });
+
     };
+
+    $scope.update = function () {
+        if (typeof ($scope.ConsultDate) === "string" || $scope.ConsultDate instanceof String) {
+            var updateDate = $scope.ConsultDate;
+        } else {
+            if (($scope.ConsultDate.getMonth() + 1) < 10 && $scope.ConsultDate.getDate() < 10) {
+                var updateDate = "0" + $scope.ConsultDate.getDate() + "-0" + ($scope.ConsultDate.getMonth() + 1) + "-" + $scope.ConsultDate.getFullYear();
+            } else if (($scope.ConsultDate.getMonth() + 1) < 10 && $scope.ConsultDate.getDate() >= 10) {
+                var updateDate = $scope.ConsultDate.getDate() + "-0" + ($scope.ConsultDate.getMonth() + 1) + "-" + $scope.ConsultDate.getFullYear();
+            } else if (($scope.ConsultDate.getMonth() + 1) >= 10 && $scope.ConsultDate.getDate() < 10) {
+                var updateDate = "0" + $scope.ConsultDate.getDate() + "-" + ($scope.ConsultDate.getMonth() + 1) + "-" + $scope.ConsultDate.getFullYear();
+            } else {
+                var updateDate = $scope.ConsultDate.getDate() + "-" + ($scope.ConsultDate.getMonth() + 1) + "-" + $scope.ConsultDate.getFullYear();
+            }
+        }
+
+        var Consultation = {
+            id: id,
+            prescription_id: prescriptionID,
+            consultation_date: updateDate,
+            payment_recieved: $scope.AmountPaid
+        };
+
+        var consultationResponse = consultationService.put(id, Consultation);
+        consultationResponse.then(function (pl) {
+            $location.path('/treatments/consultation/' + id + '/prescription/' + prescriptionID);
+        }, function (err) {
+            console.log("Err" + err);
+        });
+    }
 })

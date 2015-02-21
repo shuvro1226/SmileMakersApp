@@ -5,41 +5,24 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="SmileMakersAppDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Consultation">
+        <EntityType Name="Appointments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="patient_id" Type="int" />
+          <Property Name="appointment_date" Type="varchar" MaxLength="50" />
+          <Property Name="appointment_time" Type="varchar" MaxLength="50" />
+          <Property Name="datetime_filter" Type="bigint" />
+          <Property Name="next_task" Type="varchar" MaxLength="500" />
+          <Property Name="addition_date" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ConsultationCharge">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="prescription_id" Type="int" />
-          <Property Name="consultation_date" Type="varchar" MaxLength="50" />
-          <Property Name="payment_recieved" Type="int" />
-          <Property Name="payment_left" Type="int" />
-          <Property Name="work_done" Type="varchar" MaxLength="500" />
-          <Property Name="upper_left" Type="varchar" MaxLength="50" />
-          <Property Name="upper_right" Type="varchar" MaxLength="50" />
-          <Property Name="lower_left" Type="varchar" MaxLength="50" />
-          <Property Name="lower_right" Type="varchar" MaxLength="50" />
-          <Property Name="next_task" Type="varchar" MaxLength="500" />
-          <Property Name="next_date" Type="varchar" MaxLength="50" />
-          <Property Name="next_time" Type="varchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="Prescription">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="patient_name" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="patient_age" Type="int" Nullable="false" />
-          <Property Name="patient_contact" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="prescription_date" Type="date" Nullable="false" />
-          <Property Name="oral_examination" Type="varchar" MaxLength="500" />
-          <Property Name="medical_history" Type="varchar" MaxLength="500" />
-          <Property Name="investigation" Type="varchar" MaxLength="500" />
-          <Property Name="advice" Type="varchar" MaxLength="500" />
-          <Property Name="treatment" Type="varchar" MaxLength="500" />
-          <Property Name="appointment_date" Type="varchar" MaxLength="50" />
-          <Property Name="appointment_time" Type="varchar" MaxLength="50" />
-          <Property Name="next_task" Type="varchar" MaxLength="500" />
           <Property Name="surgeon_charge" Type="int" />
           <Property Name="assisstant_charge" Type="int" />
           <Property Name="ot_charge" Type="int" />
@@ -52,64 +35,220 @@
           <Property Name="polishing_bar" Type="int" />
           <Property Name="polishing_paste" Type="int" />
         </EntityType>
-        <Association Name="FK__Consultat__presc__239E4DCF">
-          <End Role="Prescription" Type="Self.Prescription" Multiplicity="0..1" />
-          <End Role="Consultation" Type="Self.Consultation" Multiplicity="*" />
+        <EntityType Name="Consultations">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="prescription_id" Type="int" />
+          <Property Name="consultation_date" Type="varchar" MaxLength="50" />
+          <Property Name="payment_recieved" Type="int" />
+          <Property Name="next_task" Type="varchar" MaxLength="500" />
+          <Property Name="next_date" Type="varchar" MaxLength="50" />
+          <Property Name="next_time" Type="varchar" MaxLength="50" />
+          <Property Name="datetime_filter" Type="bigint" />
+        </EntityType>
+        <EntityType Name="ConsultedTreatments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="consultation_id" Type="int" />
+          <Property Name="treatment_id" Type="int" />
+          <Property Name="upper_left" Type="varchar" MaxLength="50" />
+          <Property Name="upper_right" Type="varchar" MaxLength="50" />
+          <Property Name="lower_left" Type="varchar" MaxLength="50" />
+          <Property Name="lower_right" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Patients">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="100" />
+          <Property Name="age" Type="int" />
+          <Property Name="contact" Type="varchar" MaxLength="20" />
+          <Property Name="address" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="PrescribedTreatments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="prescription_id" Type="int" />
+          <Property Name="treatment_id" Type="int" />
+          <Property Name="upper_left" Type="varchar" MaxLength="50" />
+          <Property Name="upper_right" Type="varchar" MaxLength="50" />
+          <Property Name="lower_left" Type="varchar" MaxLength="50" />
+          <Property Name="lower_right" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Prescriptions">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="patient_id" Type="int" />
+          <Property Name="prescription_date" Type="varchar" MaxLength="50" />
+          <Property Name="oral_examination" Type="varchar" MaxLength="500" />
+          <Property Name="medical_history" Type="varchar" MaxLength="500" />
+          <Property Name="investigation" Type="varchar" MaxLength="500" />
+          <Property Name="advice" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Treatments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK__Appointme__patie__3C34F16F">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="0..1" />
+          <End Role="Appointments" Type="Self.Appointments" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Prescription">
+            <Principal Role="Patients">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="Consultation">
+            <Dependent Role="Appointments">
+              <PropertyRef Name="patient_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Consultat__presc__160F4887">
+          <End Role="Prescriptions" Type="Self.Prescriptions" Multiplicity="0..1" />
+          <End Role="ConsultationCharge" Type="Self.ConsultationCharge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prescriptions">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ConsultationCharge">
               <PropertyRef Name="prescription_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Consultat__presc__74AE54BC">
+          <End Role="Prescriptions" Type="Self.Prescriptions" Multiplicity="0..1" />
+          <End Role="Consultations" Type="Self.Consultations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prescriptions">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Consultations">
+              <PropertyRef Name="prescription_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Consulted__consu__08B54D69">
+          <End Role="Consultations" Type="Self.Consultations" Multiplicity="0..1" />
+          <End Role="ConsultedTreatments" Type="Self.ConsultedTreatments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Consultations">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ConsultedTreatments">
+              <PropertyRef Name="consultation_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Consulted__treat__09A971A2">
+          <End Role="Treatments" Type="Self.Treatments" Multiplicity="0..1" />
+          <End Role="ConsultedTreatments" Type="Self.ConsultedTreatments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Treatments">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ConsultedTreatments">
+              <PropertyRef Name="treatment_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Prescribe__presc__04E4BC85">
+          <End Role="Prescriptions" Type="Self.Prescriptions" Multiplicity="0..1" />
+          <End Role="PrescribedTreatments" Type="Self.PrescribedTreatments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prescriptions">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PrescribedTreatments">
+              <PropertyRef Name="prescription_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Prescribe__treat__05D8E0BE">
+          <End Role="Treatments" Type="Self.Treatments" Multiplicity="0..1" />
+          <End Role="PrescribedTreatments" Type="Self.PrescribedTreatments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Treatments">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PrescribedTreatments">
+              <PropertyRef Name="treatment_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Prescript__patie__71D1E811">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="0..1" />
+          <End Role="Prescriptions" Type="Self.Prescriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Prescriptions">
+              <PropertyRef Name="patient_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="SmileMakersAppDataModelStoreContainer">
-          <EntitySet Name="Consultation" EntityType="Self.Consultation" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Prescription" EntityType="Self.Prescription" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Consultat__presc__239E4DCF" Association="Self.FK__Consultat__presc__239E4DCF">
-            <End Role="Prescription" EntitySet="Prescription" />
-            <End Role="Consultation" EntitySet="Consultation" />
+          <EntitySet Name="Appointments" EntityType="Self.Appointments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ConsultationCharge" EntityType="Self.ConsultationCharge" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Consultations" EntityType="Self.Consultations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ConsultedTreatments" EntityType="Self.ConsultedTreatments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Patients" EntityType="Self.Patients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PrescribedTreatments" EntityType="Self.PrescribedTreatments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Prescriptions" EntityType="Self.Prescriptions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Treatments" EntityType="Self.Treatments" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Appointme__patie__3C34F16F" Association="Self.FK__Appointme__patie__3C34F16F">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="Appointments" EntitySet="Appointments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Consultat__presc__160F4887" Association="Self.FK__Consultat__presc__160F4887">
+            <End Role="Prescriptions" EntitySet="Prescriptions" />
+            <End Role="ConsultationCharge" EntitySet="ConsultationCharge" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Consultat__presc__74AE54BC" Association="Self.FK__Consultat__presc__74AE54BC">
+            <End Role="Prescriptions" EntitySet="Prescriptions" />
+            <End Role="Consultations" EntitySet="Consultations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Consulted__consu__08B54D69" Association="Self.FK__Consulted__consu__08B54D69">
+            <End Role="Consultations" EntitySet="Consultations" />
+            <End Role="ConsultedTreatments" EntitySet="ConsultedTreatments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Consulted__treat__09A971A2" Association="Self.FK__Consulted__treat__09A971A2">
+            <End Role="Treatments" EntitySet="Treatments" />
+            <End Role="ConsultedTreatments" EntitySet="ConsultedTreatments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Prescribe__presc__04E4BC85" Association="Self.FK__Prescribe__presc__04E4BC85">
+            <End Role="Prescriptions" EntitySet="Prescriptions" />
+            <End Role="PrescribedTreatments" EntitySet="PrescribedTreatments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Prescribe__treat__05D8E0BE" Association="Self.FK__Prescribe__treat__05D8E0BE">
+            <End Role="Treatments" EntitySet="Treatments" />
+            <End Role="PrescribedTreatments" EntitySet="PrescribedTreatments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Prescript__patie__71D1E811" Association="Self.FK__Prescript__patie__71D1E811">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="Prescriptions" EntitySet="Prescriptions" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SmileMakersAppDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Consultation">
+        <EntityType Name="ConsultationCharge">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="prescription_id" Type="Int32" />
-          <Property Name="consultation_date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="payment_recieved" Type="Int32" />
-          <Property Name="payment_left" Type="Int32" />
-          <Property Name="work_done" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="upper_left" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="upper_right" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="lower_left" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="lower_right" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="next_task" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Prescription" Relationship="Self.FK__Consultat__presc__1273C1CD" FromRole="Consultation" ToRole="Prescription" />
-          <Property Name="next_date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="next_time" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="Prescription">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="patient_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="patient_age" Type="Int32" Nullable="false" />
-          <Property Name="patient_contact" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="prescription_date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="oral_examination" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="medical_history" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="investigation" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="advice" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="treatment" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="next_task" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="surgeon_charge" Type="Int32" />
           <Property Name="assisstant_charge" Type="Int32" />
           <Property Name="ot_charge" Type="Int32" />
@@ -121,13 +260,190 @@
           <Property Name="bar" Type="Int32" />
           <Property Name="polishing_bar" Type="Int32" />
           <Property Name="polishing_paste" Type="Int32" />
-          <NavigationProperty Name="Consultations" Relationship="Self.FK__Consultat__presc__1273C1CD" FromRole="Prescription" ToRole="Consultation" />
+          <NavigationProperty Name="Prescription" Relationship="SmileMakersAppDataModel.FK__Consultat__presc__160F4887" FromRole="ConsultationCharge" ToRole="Prescription" />
+        </EntityType>
+        <EntityType Name="ConsultedTreatment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="consultation_id" Type="Int32" />
+          <Property Name="treatment_id" Type="Int32" />
+          <Property Name="upper_left" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="upper_right" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="lower_left" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="lower_right" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Treatment" Relationship="Self.FK__Consulted__treat__09A971A2" FromRole="ConsultedTreatments" ToRole="Treatments" />
+          <NavigationProperty Name="Consultation" Relationship="SmileMakersAppDataModel.FK__Consulted__consu__08B54D69" FromRole="ConsultedTreatment" ToRole="Consultation" />
+        </EntityType>
+        <EntityType Name="Patient">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="age" Type="Int32" />
+          <Property Name="contact" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Appointments" Relationship="SmileMakersAppDataModel.FK__Appointme__patie__3C34F16F" FromRole="Patient" ToRole="Appointment" />
+          <NavigationProperty Name="Prescriptions" Relationship="SmileMakersAppDataModel.FK__Prescript__patie__71D1E811" FromRole="Patient" ToRole="Prescription" />
+        </EntityType>
+        <EntityType Name="PrescribedTreatment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="prescription_id" Type="Int32" />
+          <Property Name="treatment_id" Type="Int32" />
+          <Property Name="upper_left" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="upper_right" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="lower_left" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="lower_right" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Treatment" Relationship="Self.FK__Prescribe__treat__05D8E0BE" FromRole="PrescribedTreatments" ToRole="Treatments" />
+          <NavigationProperty Name="Prescription" Relationship="SmileMakersAppDataModel.FK__Prescribe__presc__04E4BC85" FromRole="PrescribedTreatment" ToRole="Prescription" />
+        </EntityType>
+        <EntityType Name="Treatment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ConsultedTreatments" Relationship="Self.FK__Consulted__treat__09A971A2" FromRole="Treatments" ToRole="ConsultedTreatments" />
+          <NavigationProperty Name="PrescribedTreatments" Relationship="Self.FK__Prescribe__treat__05D8E0BE" FromRole="Treatments" ToRole="PrescribedTreatments" />
+        </EntityType>
+        <Association Name="FK__Consulted__treat__09A971A2">
+          <End Role="Treatments" Type="Self.Treatment" Multiplicity="0..1" />
+          <End Role="ConsultedTreatments" Type="Self.ConsultedTreatment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Treatments">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ConsultedTreatments">
+              <PropertyRef Name="treatment_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Prescribe__treat__05D8E0BE">
+          <End Role="Treatments" Type="Self.Treatment" Multiplicity="0..1" />
+          <End Role="PrescribedTreatments" Type="Self.PrescribedTreatment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Treatments">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PrescribedTreatments">
+              <PropertyRef Name="treatment_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SmileMakersAppDataEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ConsultationCharges" EntityType="Self.ConsultationCharge" />
+          <EntitySet Name="ConsultedTreatments" EntityType="Self.ConsultedTreatment" />
+          <EntitySet Name="Patients" EntityType="Self.Patient" />
+          <EntitySet Name="PrescribedTreatments" EntityType="Self.PrescribedTreatment" />
+          <EntitySet Name="Treatments" EntityType="Self.Treatment" />
+          <AssociationSet Name="FK__Consulted__treat__09A971A2" Association="Self.FK__Consulted__treat__09A971A2">
+            <End Role="Treatments" EntitySet="Treatments" />
+            <End Role="ConsultedTreatments" EntitySet="ConsultedTreatments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Prescribe__treat__05D8E0BE" Association="Self.FK__Prescribe__treat__05D8E0BE">
+            <End Role="Treatments" EntitySet="Treatments" />
+            <End Role="PrescribedTreatments" EntitySet="PrescribedTreatments" />
+          </AssociationSet>
+          <EntitySet Name="Appointments" EntityType="SmileMakersAppDataModel.Appointment" />
+          <AssociationSet Name="FK__Appointme__patie__3C34F16F" Association="SmileMakersAppDataModel.FK__Appointme__patie__3C34F16F">
+            <End Role="Patient" EntitySet="Patients" />
+            <End Role="Appointment" EntitySet="Appointments" />
+          </AssociationSet>
+          <EntitySet Name="Consultations" EntityType="SmileMakersAppDataModel.Consultation" />
+          <EntitySet Name="Prescriptions" EntityType="SmileMakersAppDataModel.Prescription" />
+          <AssociationSet Name="FK__Consultat__presc__160F4887" Association="SmileMakersAppDataModel.FK__Consultat__presc__160F4887">
+            <End Role="Prescription" EntitySet="Prescriptions" />
+            <End Role="ConsultationCharge" EntitySet="ConsultationCharges" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Consultat__presc__74AE54BC" Association="SmileMakersAppDataModel.FK__Consultat__presc__74AE54BC">
+            <End Role="Prescription" EntitySet="Prescriptions" />
+            <End Role="Consultation" EntitySet="Consultations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Consulted__consu__08B54D69" Association="SmileMakersAppDataModel.FK__Consulted__consu__08B54D69">
+            <End Role="Consultation" EntitySet="Consultations" />
+            <End Role="ConsultedTreatment" EntitySet="ConsultedTreatments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Prescript__patie__71D1E811" Association="SmileMakersAppDataModel.FK__Prescript__patie__71D1E811">
+            <End Role="Patient" EntitySet="Patients" />
+            <End Role="Prescription" EntitySet="Prescriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Prescribe__presc__04E4BC85" Association="SmileMakersAppDataModel.FK__Prescribe__presc__04E4BC85">
+            <End Role="Prescription" EntitySet="Prescriptions" />
+            <End Role="PrescribedTreatment" EntitySet="PrescribedTreatments" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Appointment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="patient_id" Type="Int32" />
           <Property Name="appointment_date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="appointment_time" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="datetime_filter" Type="Int64" />
+          <Property Name="next_task" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="addition_date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Patient" Relationship="SmileMakersAppDataModel.FK__Appointme__patie__3C34F16F" FromRole="Appointment" ToRole="Patient" />
         </EntityType>
-        <Association Name="FK__Consultat__presc__1273C1CD">
-          <End Role="Prescription" Type="Self.Prescription" Multiplicity="0..1" />
-          <End Role="Consultation" Type="Self.Consultation" Multiplicity="*" />
+        <Association Name="FK__Appointme__patie__3C34F16F">
+          <End Type="SmileMakersAppDataModel.Patient" Role="Patient" Multiplicity="0..1" />
+          <End Type="SmileMakersAppDataModel.Appointment" Role="Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Appointment">
+              <PropertyRef Name="patient_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Consultation">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="prescription_id" Type="Int32" />
+          <Property Name="consultation_date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="payment_recieved" Type="Int32" />
+          <NavigationProperty Name="Prescription" Relationship="SmileMakersAppDataModel.FK__Consultat__presc__74AE54BC" FromRole="Consultation" ToRole="Prescription" />
+          <NavigationProperty Name="ConsultedTreatments" Relationship="SmileMakersAppDataModel.FK__Consulted__consu__08B54D69" FromRole="Consultation" ToRole="ConsultedTreatment" />
+        </EntityType>
+        <EntityType Name="Prescription">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="patient_id" Type="Int32" />
+          <Property Name="prescription_date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="oral_examination" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="medical_history" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="investigation" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="advice" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ConsultationCharges" Relationship="SmileMakersAppDataModel.FK__Consultat__presc__160F4887" FromRole="Prescription" ToRole="ConsultationCharge" />
+          <NavigationProperty Name="Consultations" Relationship="SmileMakersAppDataModel.FK__Consultat__presc__74AE54BC" FromRole="Prescription" ToRole="Consultation" />
+          <NavigationProperty Name="Patient" Relationship="SmileMakersAppDataModel.FK__Prescript__patie__71D1E811" FromRole="Prescription" ToRole="Patient" />
+          <NavigationProperty Name="PrescribedTreatments" Relationship="SmileMakersAppDataModel.FK__Prescribe__presc__04E4BC85" FromRole="Prescription" ToRole="PrescribedTreatment" />
+        </EntityType>
+        <Association Name="FK__Consultat__presc__160F4887">
+          <End Type="SmileMakersAppDataModel.Prescription" Role="Prescription" Multiplicity="0..1" />
+          <End Type="SmileMakersAppDataModel.ConsultationCharge" Role="ConsultationCharge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prescription">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ConsultationCharge">
+              <PropertyRef Name="prescription_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Consultat__presc__74AE54BC">
+          <End Type="SmileMakersAppDataModel.Prescription" Role="Prescription" Multiplicity="0..1" />
+          <End Type="SmileMakersAppDataModel.Consultation" Role="Consultation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Prescription">
               <PropertyRef Name="id" />
@@ -137,55 +453,53 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="SmileMakersAppDataEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Consultations" EntityType="Self.Consultation" />
-          <EntitySet Name="Prescriptions" EntityType="Self.Prescription" />
-          <AssociationSet Name="FK__Consultat__presc__1273C1CD" Association="Self.FK__Consultat__presc__1273C1CD">
-            <End Role="Prescription" EntitySet="Prescriptions" />
-            <End Role="Consultation" EntitySet="Consultations" />
-          </AssociationSet>
-        </EntityContainer>
+        <Association Name="FK__Consulted__consu__08B54D69">
+          <End Type="SmileMakersAppDataModel.Consultation" Role="Consultation" Multiplicity="0..1" />
+          <End Type="SmileMakersAppDataModel.ConsultedTreatment" Role="ConsultedTreatment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Consultation">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ConsultedTreatment">
+              <PropertyRef Name="consultation_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Prescript__patie__71D1E811">
+          <End Type="SmileMakersAppDataModel.Patient" Role="Patient" Multiplicity="0..1" />
+          <End Type="SmileMakersAppDataModel.Prescription" Role="Prescription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Prescription">
+              <PropertyRef Name="patient_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Prescribe__presc__04E4BC85">
+          <End Type="SmileMakersAppDataModel.Prescription" Role="Prescription" Multiplicity="0..1" />
+          <End Type="SmileMakersAppDataModel.PrescribedTreatment" Role="PrescribedTreatment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prescription">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PrescribedTreatment">
+              <PropertyRef Name="prescription_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="SmileMakersAppDataModelStoreContainer" CdmEntityContainer="SmileMakersAppDataEntities">
-          <EntitySetMapping Name="Consultations">
-            <EntityTypeMapping TypeName="SmileMakersAppDataModel.Consultation">
-              <MappingFragment StoreEntitySet="Consultation">
-                <ScalarProperty Name="next_time" ColumnName="next_time" />
-                <ScalarProperty Name="next_date" ColumnName="next_date" />
+          <EntitySetMapping Name="ConsultationCharges">
+            <EntityTypeMapping TypeName="SmileMakersAppDataModel.ConsultationCharge">
+              <MappingFragment StoreEntitySet="ConsultationCharge">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="prescription_id" ColumnName="prescription_id" />
-                <ScalarProperty Name="consultation_date" ColumnName="consultation_date" />
-                <ScalarProperty Name="payment_recieved" ColumnName="payment_recieved" />
-                <ScalarProperty Name="payment_left" ColumnName="payment_left" />
-                <ScalarProperty Name="work_done" ColumnName="work_done" />
-                <ScalarProperty Name="upper_left" ColumnName="upper_left" />
-                <ScalarProperty Name="upper_right" ColumnName="upper_right" />
-                <ScalarProperty Name="lower_left" ColumnName="lower_left" />
-                <ScalarProperty Name="lower_right" ColumnName="lower_right" />
-                <ScalarProperty Name="next_task" ColumnName="next_task" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Prescriptions">
-            <EntityTypeMapping TypeName="SmileMakersAppDataModel.Prescription">
-              <MappingFragment StoreEntitySet="Prescription">
-                <ScalarProperty Name="appointment_time" ColumnName="appointment_time" />
-                <ScalarProperty Name="appointment_date" ColumnName="appointment_date" />
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="patient_name" ColumnName="patient_name" />
-                <ScalarProperty Name="patient_age" ColumnName="patient_age" />
-                <ScalarProperty Name="patient_contact" ColumnName="patient_contact" />
-                <ScalarProperty Name="prescription_date" ColumnName="prescription_date" />
-                <ScalarProperty Name="oral_examination" ColumnName="oral_examination" />
-                <ScalarProperty Name="medical_history" ColumnName="medical_history" />
-                <ScalarProperty Name="investigation" ColumnName="investigation" />
-                <ScalarProperty Name="advice" ColumnName="advice" />
-                <ScalarProperty Name="treatment" ColumnName="treatment" />
-                <ScalarProperty Name="next_task" ColumnName="next_task" />
                 <ScalarProperty Name="surgeon_charge" ColumnName="surgeon_charge" />
                 <ScalarProperty Name="assisstant_charge" ColumnName="assisstant_charge" />
                 <ScalarProperty Name="ot_charge" ColumnName="ot_charge" />
@@ -197,6 +511,87 @@
                 <ScalarProperty Name="bar" ColumnName="bar" />
                 <ScalarProperty Name="polishing_bar" ColumnName="polishing_bar" />
                 <ScalarProperty Name="polishing_paste" ColumnName="polishing_paste" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConsultedTreatments">
+            <EntityTypeMapping TypeName="SmileMakersAppDataModel.ConsultedTreatment">
+              <MappingFragment StoreEntitySet="ConsultedTreatments">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="consultation_id" ColumnName="consultation_id" />
+                <ScalarProperty Name="treatment_id" ColumnName="treatment_id" />
+                <ScalarProperty Name="upper_left" ColumnName="upper_left" />
+                <ScalarProperty Name="upper_right" ColumnName="upper_right" />
+                <ScalarProperty Name="lower_left" ColumnName="lower_left" />
+                <ScalarProperty Name="lower_right" ColumnName="lower_right" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Patients">
+            <EntityTypeMapping TypeName="SmileMakersAppDataModel.Patient">
+              <MappingFragment StoreEntitySet="Patients">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="age" ColumnName="age" />
+                <ScalarProperty Name="contact" ColumnName="contact" />
+                <ScalarProperty Name="address" ColumnName="address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PrescribedTreatments">
+            <EntityTypeMapping TypeName="SmileMakersAppDataModel.PrescribedTreatment">
+              <MappingFragment StoreEntitySet="PrescribedTreatments">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="prescription_id" ColumnName="prescription_id" />
+                <ScalarProperty Name="treatment_id" ColumnName="treatment_id" />
+                <ScalarProperty Name="upper_left" ColumnName="upper_left" />
+                <ScalarProperty Name="upper_right" ColumnName="upper_right" />
+                <ScalarProperty Name="lower_left" ColumnName="lower_left" />
+                <ScalarProperty Name="lower_right" ColumnName="lower_right" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Treatments">
+            <EntityTypeMapping TypeName="SmileMakersAppDataModel.Treatment">
+              <MappingFragment StoreEntitySet="Treatments">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Appointments">
+            <EntityTypeMapping TypeName="SmileMakersAppDataModel.Appointment">
+              <MappingFragment StoreEntitySet="Appointments">
+                <ScalarProperty Name="addition_date" ColumnName="addition_date" />
+                <ScalarProperty Name="next_task" ColumnName="next_task" />
+                <ScalarProperty Name="datetime_filter" ColumnName="datetime_filter" />
+                <ScalarProperty Name="appointment_time" ColumnName="appointment_time" />
+                <ScalarProperty Name="appointment_date" ColumnName="appointment_date" />
+                <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Consultations">
+            <EntityTypeMapping TypeName="SmileMakersAppDataModel.Consultation">
+              <MappingFragment StoreEntitySet="Consultations">
+                <ScalarProperty Name="payment_recieved" ColumnName="payment_recieved" />
+                <ScalarProperty Name="consultation_date" ColumnName="consultation_date" />
+                <ScalarProperty Name="prescription_id" ColumnName="prescription_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Prescriptions">
+            <EntityTypeMapping TypeName="SmileMakersAppDataModel.Prescription">
+              <MappingFragment StoreEntitySet="Prescriptions">
+                <ScalarProperty Name="advice" ColumnName="advice" />
+                <ScalarProperty Name="investigation" ColumnName="investigation" />
+                <ScalarProperty Name="medical_history" ColumnName="medical_history" />
+                <ScalarProperty Name="oral_examination" ColumnName="oral_examination" />
+                <ScalarProperty Name="prescription_date" ColumnName="prescription_date" />
+                <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

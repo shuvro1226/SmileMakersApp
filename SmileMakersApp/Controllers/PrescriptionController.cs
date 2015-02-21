@@ -16,10 +16,10 @@ namespace SmileMakersApp.Controllers
         }
 
         //
-        // GET: /Prescription/Details/5
-        public ActionResult Details(int id)
+        // GET: /Prescription/Details
+        public ActionResult Details()
         {
-            return View();
+            return PartialView("Show");
         }
 
         //

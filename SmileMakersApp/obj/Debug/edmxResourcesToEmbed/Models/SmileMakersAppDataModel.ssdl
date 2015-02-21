@@ -1,40 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="SmileMakersAppDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityType Name="Consultation">
+  <EntityType Name="Appointments">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="patient_id" Type="int" />
+    <Property Name="appointment_date" Type="varchar" MaxLength="50" />
+    <Property Name="appointment_time" Type="varchar" MaxLength="50" />
+    <Property Name="datetime_filter" Type="bigint" />
+    <Property Name="next_task" Type="varchar" MaxLength="500" />
+    <Property Name="addition_date" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="ConsultationCharge">
     <Key>
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="prescription_id" Type="int" />
-    <Property Name="consultation_date" Type="varchar" MaxLength="50" />
-    <Property Name="payment_recieved" Type="int" />
-    <Property Name="payment_left" Type="int" />
-    <Property Name="work_done" Type="varchar" MaxLength="500" />
-    <Property Name="upper_left" Type="varchar" MaxLength="50" />
-    <Property Name="upper_right" Type="varchar" MaxLength="50" />
-    <Property Name="lower_left" Type="varchar" MaxLength="50" />
-    <Property Name="lower_right" Type="varchar" MaxLength="50" />
-    <Property Name="next_task" Type="varchar" MaxLength="500" />
-    <Property Name="next_date" Type="varchar" MaxLength="50" />
-    <Property Name="next_time" Type="varchar" MaxLength="50" />
-  </EntityType>
-  <EntityType Name="Prescription">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="patient_name" Type="varchar" MaxLength="100" Nullable="false" />
-    <Property Name="patient_age" Type="int" Nullable="false" />
-    <Property Name="patient_contact" Type="varchar" MaxLength="20" Nullable="false" />
-    <Property Name="prescription_date" Type="date" Nullable="false" />
-    <Property Name="oral_examination" Type="varchar" MaxLength="500" />
-    <Property Name="medical_history" Type="varchar" MaxLength="500" />
-    <Property Name="investigation" Type="varchar" MaxLength="500" />
-    <Property Name="advice" Type="varchar" MaxLength="500" />
-    <Property Name="treatment" Type="varchar" MaxLength="500" />
-    <Property Name="appointment_date" Type="varchar" MaxLength="50" />
-    <Property Name="appointment_time" Type="varchar" MaxLength="50" />
-    <Property Name="next_task" Type="varchar" MaxLength="500" />
     <Property Name="surgeon_charge" Type="int" />
     <Property Name="assisstant_charge" Type="int" />
     <Property Name="ot_charge" Type="int" />
@@ -47,24 +30,208 @@
     <Property Name="polishing_bar" Type="int" />
     <Property Name="polishing_paste" Type="int" />
   </EntityType>
-  <Association Name="FK__Consultat__presc__239E4DCF">
-    <End Role="Prescription" Type="Self.Prescription" Multiplicity="0..1" />
-    <End Role="Consultation" Type="Self.Consultation" Multiplicity="*" />
+  <EntityType Name="Consultations">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="prescription_id" Type="int" />
+    <Property Name="consultation_date" Type="varchar" MaxLength="50" />
+    <Property Name="payment_recieved" Type="int" />
+    <Property Name="next_task" Type="varchar" MaxLength="500" />
+    <Property Name="next_date" Type="varchar" MaxLength="50" />
+    <Property Name="next_time" Type="varchar" MaxLength="50" />
+    <Property Name="datetime_filter" Type="bigint" />
+  </EntityType>
+  <EntityType Name="ConsultedTreatments">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="consultation_id" Type="int" />
+    <Property Name="treatment_id" Type="int" />
+    <Property Name="upper_left" Type="varchar" MaxLength="50" />
+    <Property Name="upper_right" Type="varchar" MaxLength="50" />
+    <Property Name="lower_left" Type="varchar" MaxLength="50" />
+    <Property Name="lower_right" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Patients">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="100" />
+    <Property Name="age" Type="int" />
+    <Property Name="contact" Type="varchar" MaxLength="20" />
+    <Property Name="address" Type="varchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="PrescribedTreatments">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="prescription_id" Type="int" />
+    <Property Name="treatment_id" Type="int" />
+    <Property Name="upper_left" Type="varchar" MaxLength="50" />
+    <Property Name="upper_right" Type="varchar" MaxLength="50" />
+    <Property Name="lower_left" Type="varchar" MaxLength="50" />
+    <Property Name="lower_right" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Prescriptions">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="patient_id" Type="int" />
+    <Property Name="prescription_date" Type="varchar" MaxLength="50" />
+    <Property Name="oral_examination" Type="varchar" MaxLength="500" />
+    <Property Name="medical_history" Type="varchar" MaxLength="500" />
+    <Property Name="investigation" Type="varchar" MaxLength="500" />
+    <Property Name="advice" Type="varchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="Treatments">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <Association Name="FK__Appointme__patie__3C34F16F">
+    <End Role="Patients" Type="Self.Patients" Multiplicity="0..1" />
+    <End Role="Appointments" Type="Self.Appointments" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Prescription">
+      <Principal Role="Patients">
         <PropertyRef Name="id" />
       </Principal>
-      <Dependent Role="Consultation">
+      <Dependent Role="Appointments">
+        <PropertyRef Name="patient_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Consultat__presc__160F4887">
+    <End Role="Prescriptions" Type="Self.Prescriptions" Multiplicity="0..1" />
+    <End Role="ConsultationCharge" Type="Self.ConsultationCharge" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Prescriptions">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ConsultationCharge">
         <PropertyRef Name="prescription_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__Consultat__presc__74AE54BC">
+    <End Role="Prescriptions" Type="Self.Prescriptions" Multiplicity="0..1" />
+    <End Role="Consultations" Type="Self.Consultations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Prescriptions">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Consultations">
+        <PropertyRef Name="prescription_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Consulted__consu__08B54D69">
+    <End Role="Consultations" Type="Self.Consultations" Multiplicity="0..1" />
+    <End Role="ConsultedTreatments" Type="Self.ConsultedTreatments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Consultations">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ConsultedTreatments">
+        <PropertyRef Name="consultation_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Consulted__treat__09A971A2">
+    <End Role="Treatments" Type="Self.Treatments" Multiplicity="0..1" />
+    <End Role="ConsultedTreatments" Type="Self.ConsultedTreatments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Treatments">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ConsultedTreatments">
+        <PropertyRef Name="treatment_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Prescribe__presc__04E4BC85">
+    <End Role="Prescriptions" Type="Self.Prescriptions" Multiplicity="0..1" />
+    <End Role="PrescribedTreatments" Type="Self.PrescribedTreatments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Prescriptions">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="PrescribedTreatments">
+        <PropertyRef Name="prescription_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Prescribe__treat__05D8E0BE">
+    <End Role="Treatments" Type="Self.Treatments" Multiplicity="0..1" />
+    <End Role="PrescribedTreatments" Type="Self.PrescribedTreatments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Treatments">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="PrescribedTreatments">
+        <PropertyRef Name="treatment_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Prescript__patie__71D1E811">
+    <End Role="Patients" Type="Self.Patients" Multiplicity="0..1" />
+    <End Role="Prescriptions" Type="Self.Prescriptions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patients">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Prescriptions">
+        <PropertyRef Name="patient_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="SmileMakersAppDataModelStoreContainer">
-    <EntitySet Name="Consultation" EntityType="Self.Consultation" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Prescription" EntityType="Self.Prescription" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__Consultat__presc__239E4DCF" Association="Self.FK__Consultat__presc__239E4DCF">
-      <End Role="Prescription" EntitySet="Prescription" />
-      <End Role="Consultation" EntitySet="Consultation" />
+    <EntitySet Name="Appointments" EntityType="Self.Appointments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ConsultationCharge" EntityType="Self.ConsultationCharge" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Consultations" EntityType="Self.Consultations" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ConsultedTreatments" EntityType="Self.ConsultedTreatments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Patients" EntityType="Self.Patients" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PrescribedTreatments" EntityType="Self.PrescribedTreatments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Prescriptions" EntityType="Self.Prescriptions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Treatments" EntityType="Self.Treatments" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Appointme__patie__3C34F16F" Association="Self.FK__Appointme__patie__3C34F16F">
+      <End Role="Patients" EntitySet="Patients" />
+      <End Role="Appointments" EntitySet="Appointments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Consultat__presc__160F4887" Association="Self.FK__Consultat__presc__160F4887">
+      <End Role="Prescriptions" EntitySet="Prescriptions" />
+      <End Role="ConsultationCharge" EntitySet="ConsultationCharge" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Consultat__presc__74AE54BC" Association="Self.FK__Consultat__presc__74AE54BC">
+      <End Role="Prescriptions" EntitySet="Prescriptions" />
+      <End Role="Consultations" EntitySet="Consultations" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Consulted__consu__08B54D69" Association="Self.FK__Consulted__consu__08B54D69">
+      <End Role="Consultations" EntitySet="Consultations" />
+      <End Role="ConsultedTreatments" EntitySet="ConsultedTreatments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Consulted__treat__09A971A2" Association="Self.FK__Consulted__treat__09A971A2">
+      <End Role="Treatments" EntitySet="Treatments" />
+      <End Role="ConsultedTreatments" EntitySet="ConsultedTreatments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Prescribe__presc__04E4BC85" Association="Self.FK__Prescribe__presc__04E4BC85">
+      <End Role="Prescriptions" EntitySet="Prescriptions" />
+      <End Role="PrescribedTreatments" EntitySet="PrescribedTreatments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Prescribe__treat__05D8E0BE" Association="Self.FK__Prescribe__treat__05D8E0BE">
+      <End Role="Treatments" EntitySet="Treatments" />
+      <End Role="PrescribedTreatments" EntitySet="PrescribedTreatments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Prescript__patie__71D1E811" Association="Self.FK__Prescript__patie__71D1E811">
+      <End Role="Patients" EntitySet="Patients" />
+      <End Role="Prescriptions" EntitySet="Prescriptions" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

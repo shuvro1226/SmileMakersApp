@@ -1,0 +1,120 @@
+﻿<div ng-controller="treatmentsController">
+    <div class="row">
+        <div class="col-xs-8">
+            <div class="row">
+                <div class="col-xs-12">
+                    <ol class="nya-bs-select" ng-model="selectedTreatment">
+                        <li nya-bs-option="treatment in treatments">
+                            <a>
+                                {{treatment.name}}
+                            </a>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2" style="margin-top:8px">
+                    Upper Right:
+                </div>
+                <div class="col-xs-7">
+                    <div ng-repeat="tooth in teethUR">
+                        <div class="checkbox checkbox-success">
+                            <input type="checkbox" id="checbox1{{tooth.id}}" ng-model="tooth.checked" ng-change="upperRight()" />
+                            <label for="checbox1{{tooth.id}}">{{tooth.id}}</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <input type="text" ng-model="URSelected" class="form-control" readonly="readonly" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2" style="margin-top:8px">
+                    Upper Left:
+                </div>
+                <div class="col-xs-7">
+                    <div ng-repeat="tooth in teethUL">
+                        <div class="checkbox checkbox-success">
+                            <input type="checkbox" id="checbox2{{tooth.id}}" ng-model="tooth.checked" ng-change="upperLeft()" />
+                            <label for="checbox2{{tooth.id}}">{{tooth.id}}</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <input type="text" ng-model="ULSelected" class="form-control" readonly="readonly" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2" style="margin-top:8px">
+                    Lower Right:
+                </div>
+                <div class="col-xs-7">
+                    <div ng-repeat="tooth in teethLR">
+                        <div class="checkbox checkbox-success">
+                            <input type="checkbox" id="checbox3{{tooth.id}}" ng-model="tooth.checked" ng-change="lowerRight()" />
+                            <label for="checbox3{{tooth.id}}">{{tooth.id}}</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <input type="text" ng-model="LRSelected" class="form-control" readonly="readonly" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2" style="margin-top:8px">
+                    Lower Left:
+                </div>
+                <div class="col-xs-7">
+                    <div ng-repeat="tooth in teethLL">
+                        <div class="checkbox checkbox-success">
+                            <input type="checkbox" id="checbox4{{tooth.id}}" ng-model="tooth.checked" ng-change="lowerLeft()" />
+                            <label for="checbox4{{tooth.id}}">{{tooth.id}}</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <input type="text" ng-model="LLSelected" class="form-control" readonly="readonly" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3">
+                    <input type="button" class="btn-danger form-control" ng-click="addTreatmentDetails()" value="Add Treatment" ng-show="!Update" />
+                    <input type="button" class="btn-danger form-control" ng-click="updateTreatmentDetails()" value="Update Treatment" ng-show="Update" />
+                </div>
+                <div class="col-xs-3">
+                    <input type="button" class="btn-danger form-control" ng-click="updatePrescription()" value="Update prescription" ng-show="Prescription" />
+                    <input type="button" class="btn-danger form-control" ng-click="updateConsultation()" value="Update consultation" ng-show="!Prescription" />
+                </div>
+                <div class="col-xs-3">
+                    <input type="button" class="btn-danger form-control" ng-click="resetData()" value="Reset Fields" />
+                </div>
+                <div class="col-xs-3">
+                    <input type="button" class="btn-success form-control" ng-click="done()" value="Done" />
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-4">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h3 class="buxton-sketch">Treatments</h3>
+                </div>
+            </div>
+            <div class="row list-group" ng-repeat="treatments in PrescribedTreatments">
+                <div class="col-xs-12 list-group-item" style="float:left; margin:10px; width:calc(100% - 20px)">
+                    <div style="position:absolute; right:10px">
+                        <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="updateTreatment(treatments.ID,treatments.TreatmentID,treatments.TreatmentType,treatments.UpperRight,treatments.UpperLeft,treatments.LowerRight,treatments.LowerLeft)">
+                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                    <label style="float:left; width:100%">{{treatments.TreatmentType}}</label>
+                    <div style="width:210px">
+                        <span class="treatment-teeth" style="border-bottom:1px solid #333; border-right:1px solid #333; text-align:right">&nbsp;{{treatments.UpperLeft}}&nbsp;</span>
+                        <span class="treatment-teeth" style="border-bottom:1px solid #333">&nbsp;{{treatments.UpperRight}}&nbsp;</span>
+                        <span class="treatment-teeth" style="border-right:1px solid #333; text-align:right">&nbsp;{{treatments.LowerLeft }}&nbsp;</span>
+                        <span class="treatment-teeth" style="">&nbsp;{{treatments.LowerRight}}&nbsp;</span>
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </div>
+</div>

@@ -1,41 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="SmileMakersAppDataModelStoreContainer" CdmEntityContainer="SmileMakersAppDataEntities">
-    <EntitySetMapping Name="Consultations">
-      <EntityTypeMapping TypeName="SmileMakersAppDataModel.Consultation">
-        <MappingFragment StoreEntitySet="Consultation">
-          <ScalarProperty Name="next_time" ColumnName="next_time" />
-          <ScalarProperty Name="next_date" ColumnName="next_date" />
+    <EntitySetMapping Name="ConsultationCharges">
+      <EntityTypeMapping TypeName="SmileMakersAppDataModel.ConsultationCharge">
+        <MappingFragment StoreEntitySet="ConsultationCharge">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="prescription_id" ColumnName="prescription_id" />
-          <ScalarProperty Name="consultation_date" ColumnName="consultation_date" />
-          <ScalarProperty Name="payment_recieved" ColumnName="payment_recieved" />
-          <ScalarProperty Name="payment_left" ColumnName="payment_left" />
-          <ScalarProperty Name="work_done" ColumnName="work_done" />
-          <ScalarProperty Name="upper_left" ColumnName="upper_left" />
-          <ScalarProperty Name="upper_right" ColumnName="upper_right" />
-          <ScalarProperty Name="lower_left" ColumnName="lower_left" />
-          <ScalarProperty Name="lower_right" ColumnName="lower_right" />
-          <ScalarProperty Name="next_task" ColumnName="next_task" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Prescriptions">
-      <EntityTypeMapping TypeName="SmileMakersAppDataModel.Prescription">
-        <MappingFragment StoreEntitySet="Prescription">
-          <ScalarProperty Name="appointment_time" ColumnName="appointment_time" />
-          <ScalarProperty Name="appointment_date" ColumnName="appointment_date" />
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="patient_name" ColumnName="patient_name" />
-          <ScalarProperty Name="patient_age" ColumnName="patient_age" />
-          <ScalarProperty Name="patient_contact" ColumnName="patient_contact" />
-          <ScalarProperty Name="prescription_date" ColumnName="prescription_date" />
-          <ScalarProperty Name="oral_examination" ColumnName="oral_examination" />
-          <ScalarProperty Name="medical_history" ColumnName="medical_history" />
-          <ScalarProperty Name="investigation" ColumnName="investigation" />
-          <ScalarProperty Name="advice" ColumnName="advice" />
-          <ScalarProperty Name="treatment" ColumnName="treatment" />
-          <ScalarProperty Name="next_task" ColumnName="next_task" />
           <ScalarProperty Name="surgeon_charge" ColumnName="surgeon_charge" />
           <ScalarProperty Name="assisstant_charge" ColumnName="assisstant_charge" />
           <ScalarProperty Name="ot_charge" ColumnName="ot_charge" />
@@ -47,6 +17,87 @@
           <ScalarProperty Name="bar" ColumnName="bar" />
           <ScalarProperty Name="polishing_bar" ColumnName="polishing_bar" />
           <ScalarProperty Name="polishing_paste" ColumnName="polishing_paste" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ConsultedTreatments">
+      <EntityTypeMapping TypeName="SmileMakersAppDataModel.ConsultedTreatment">
+        <MappingFragment StoreEntitySet="ConsultedTreatments">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="consultation_id" ColumnName="consultation_id" />
+          <ScalarProperty Name="treatment_id" ColumnName="treatment_id" />
+          <ScalarProperty Name="upper_left" ColumnName="upper_left" />
+          <ScalarProperty Name="upper_right" ColumnName="upper_right" />
+          <ScalarProperty Name="lower_left" ColumnName="lower_left" />
+          <ScalarProperty Name="lower_right" ColumnName="lower_right" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Patients">
+      <EntityTypeMapping TypeName="SmileMakersAppDataModel.Patient">
+        <MappingFragment StoreEntitySet="Patients">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="age" ColumnName="age" />
+          <ScalarProperty Name="contact" ColumnName="contact" />
+          <ScalarProperty Name="address" ColumnName="address" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PrescribedTreatments">
+      <EntityTypeMapping TypeName="SmileMakersAppDataModel.PrescribedTreatment">
+        <MappingFragment StoreEntitySet="PrescribedTreatments">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="prescription_id" ColumnName="prescription_id" />
+          <ScalarProperty Name="treatment_id" ColumnName="treatment_id" />
+          <ScalarProperty Name="upper_left" ColumnName="upper_left" />
+          <ScalarProperty Name="upper_right" ColumnName="upper_right" />
+          <ScalarProperty Name="lower_left" ColumnName="lower_left" />
+          <ScalarProperty Name="lower_right" ColumnName="lower_right" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Treatments">
+      <EntityTypeMapping TypeName="SmileMakersAppDataModel.Treatment">
+        <MappingFragment StoreEntitySet="Treatments">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Appointments">
+      <EntityTypeMapping TypeName="SmileMakersAppDataModel.Appointment">
+        <MappingFragment StoreEntitySet="Appointments">
+          <ScalarProperty Name="addition_date" ColumnName="addition_date" />
+          <ScalarProperty Name="next_task" ColumnName="next_task" />
+          <ScalarProperty Name="datetime_filter" ColumnName="datetime_filter" />
+          <ScalarProperty Name="appointment_time" ColumnName="appointment_time" />
+          <ScalarProperty Name="appointment_date" ColumnName="appointment_date" />
+          <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Consultations">
+      <EntityTypeMapping TypeName="SmileMakersAppDataModel.Consultation">
+        <MappingFragment StoreEntitySet="Consultations">
+          <ScalarProperty Name="payment_recieved" ColumnName="payment_recieved" />
+          <ScalarProperty Name="consultation_date" ColumnName="consultation_date" />
+          <ScalarProperty Name="prescription_id" ColumnName="prescription_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Prescriptions">
+      <EntityTypeMapping TypeName="SmileMakersAppDataModel.Prescription">
+        <MappingFragment StoreEntitySet="Prescriptions">
+          <ScalarProperty Name="advice" ColumnName="advice" />
+          <ScalarProperty Name="investigation" ColumnName="investigation" />
+          <ScalarProperty Name="medical_history" ColumnName="medical_history" />
+          <ScalarProperty Name="oral_examination" ColumnName="oral_examination" />
+          <ScalarProperty Name="prescription_date" ColumnName="prescription_date" />
+          <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

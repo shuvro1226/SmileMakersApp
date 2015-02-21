@@ -1,0 +1,61 @@
+﻿<script type="text/javascript">
+    $('.clockpicker').clockpicker()
+        .find('input').change(function () {
+            console.log(this.value);
+        });
+
+
+    if (/mobile/i.test(navigator.userAgent)) {
+        $('input').prop('readOnly', true);
+    }
+</script>
+
+
+
+<div ng-controller="appointmentController">
+    <div class="row" style="margin: 30px 0px">
+        <div class="col-xs-12 text-center">
+            <h3 ng-show="!Update" class="buxton-sketch">Add new appointment for</h3>
+            <h3 ng-show="Update" class="buxton-sketch">Update appointment for {{Patient}}</h3>
+            <div class="row" ng-show="!Update">
+                <div class="col-xs-4 center-block">
+                    <input type="text" class="form-control" placeholder="Select patient" ng-model="PatientID" typeahead="patient as patient.name + ' (' + patient.contact + ')' for patient in patients | filter:{name:$viewValue}" style="margin-top:20px" />
+                </div>
+            </div><br />
+            <label for="pdate">Date:</label>&nbsp;{{date}}
+        </div>
+    </div>
+    <div class="row" style="margin-bottom:100px">
+        <div class="col-xs-3"></div>
+        <div class="col-xs-6">
+            <div class="row">
+                <div class="col-xs-8">
+                    <p class="input-group">
+                        <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="AppointmentDate" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" placeholder="Appointment date" readonly />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                </div>
+                <div class="col-xs-4">
+                    <div class="input-group clockpicker">
+                        <input type="text" class="form-control" ng-model="AppointmentTime" readonly placeholder="Appointment time">
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-time"></span>
+                        </span>
+                    </div>
+                </div>
+            </div><br />
+            <textarea class="form-control" placeholder="Next appointment task" ng-model="NextTask" ng-disabled="!AppointmentDate || !AppointmentTime"></textarea><br />
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <input type="button" class="btn btn-success" value="Add new appointment" ng-click="save()" ng-show="!Update" />
+                    <input type="button" class="btn btn-success" value="Update this appointment" ng-click="update()" ng-show="Update" />
+                </div>
+            </div>
+
+        </div>
+        <!--input type='text' class="form-control datepicker" readonly placeholder="Select appointment date" style="cursor:pointer" ng-model="AppointmentDate" /-->
+    </div>
+</div>
