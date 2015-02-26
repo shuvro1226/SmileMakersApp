@@ -23,7 +23,7 @@
             <th><h4 class="buxton-sketch">Contact no.</h4></th>
             <th><h4 class="buxton-sketch">Scheduled task</h4></th>
         </tr>
-        <tr ng-repeat="appointment in appointments | orderBy:'-FilterTime':true" ng-click="updateAppointment(appointment.ID)">
+        <tr ng-repeat="appointment in appointments | orderBy:'-FilterTime':true" ng-click="updateAppointment(appointment.ID)" style="cursor:pointer">
             <td>{{appointment.Time}}</td>
             <td>{{appointment.AppointmentFixed}}</td>
             <td>{{appointment.Name}}</td>

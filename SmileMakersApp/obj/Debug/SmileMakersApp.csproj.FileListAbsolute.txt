@@ -4,6 +4,8 @@ C:\Users\Shuvro\documents\visual studio 2013\Projects\SmileMakersApp\SmileMakers
 C:\Users\Shuvro\documents\visual studio 2013\Projects\SmileMakersApp\SmileMakersApp\bin\Antlr3.Runtime.dll
 C:\Users\Shuvro\documents\visual studio 2013\Projects\SmileMakersApp\SmileMakersApp\bin\EntityFramework.dll
 C:\Users\Shuvro\documents\visual studio 2013\Projects\SmileMakersApp\SmileMakersApp\bin\EntityFramework.SqlServer.dll
+C:\Users\Shuvro\documents\visual studio 2013\Projects\SmileMakersApp\SmileMakersApp\bin\itextsharp.dll
+C:\Users\Shuvro\documents\visual studio 2013\Projects\SmileMakersApp\SmileMakersApp\bin\itextsharp.xmlworker.dll
 C:\Users\Shuvro\documents\visual studio 2013\Projects\SmileMakersApp\SmileMakersApp\bin\Microsoft.AspNet.Identity.Core.dll
 C:\Users\Shuvro\documents\visual studio 2013\Projects\SmileMakersApp\SmileMakersApp\bin\Microsoft.AspNet.Identity.EntityFramework.dll
 C:\Users\Shuvro\documents\visual studio 2013\Projects\SmileMakersApp\SmileMakersApp\bin\Microsoft.AspNet.Identity.Owin.dll
@@ -17,6 +19,7 @@ C:\Users\Shuvro\documents\visual studio 2013\Projects\SmileMakersApp\SmileMakers
 C:\Users\Shuvro\documents\visual studio 2013\Projects\SmileMakersApp\SmileMakersApp\bin\Microsoft.Owin.Security.OAuth.dll
 C:\Users\Shuvro\documents\visual studio 2013\Projects\SmileMakersApp\SmileMakersApp\bin\Microsoft.Owin.Security.Twitter.dll
 C:\Users\Shuvro\documents\visual studio 2013\Projects\SmileMakersApp\SmileMakersApp\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Shuvro\documents\visual studio 2013\Projects\SmileMakersApp\SmileMakersApp\bin\MvcRazorToPdf.dll
 C:\Users\Shuvro\documents\visual studio 2013\Projects\SmileMakersApp\SmileMakersApp\bin\Newtonsoft.Json.dll
 C:\Users\Shuvro\documents\visual studio 2013\Projects\SmileMakersApp\SmileMakersApp\bin\Owin.dll
 C:\Users\Shuvro\documents\visual studio 2013\Projects\SmileMakersApp\SmileMakersApp\bin\System.Net.Http.Formatting.dll
@@ -30,6 +33,7 @@ C:\Users\Shuvro\documents\visual studio 2013\Projects\SmileMakersApp\SmileMakers
 C:\Users\Shuvro\documents\visual studio 2013\Projects\SmileMakersApp\SmileMakersApp\bin\System.Web.WebPages.dll
 C:\Users\Shuvro\documents\visual studio 2013\Projects\SmileMakersApp\SmileMakersApp\bin\System.Web.WebPages.Razor.dll
 C:\Users\Shuvro\documents\visual studio 2013\Projects\SmileMakersApp\SmileMakersApp\bin\WebGrease.dll
+C:\Users\Shuvro\documents\visual studio 2013\Projects\SmileMakersApp\SmileMakersApp\bin\itextsharp.xml
 C:\Users\Shuvro\documents\visual studio 2013\Projects\SmileMakersApp\SmileMakersApp\bin\System.Web.Helpers.xml
 C:\Users\Shuvro\documents\visual studio 2013\Projects\SmileMakersApp\SmileMakersApp\bin\System.Web.Mvc.xml
 C:\Users\Shuvro\documents\visual studio 2013\Projects\SmileMakersApp\SmileMakersApp\bin\System.Web.Optimization.xml

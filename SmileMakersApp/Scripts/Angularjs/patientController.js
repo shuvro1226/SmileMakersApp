@@ -2,18 +2,20 @@
 /// <reference path="module.js" />
 
 app.controller("patientController", function ($scope, $routeParams, $log, $location, patientService) {
-    var type = "";
+    var type = "", searchTerm = "";
     $scope.PatientSelected = false;
     var patientid = $scope.ContactNumber = $routeParams.id;
     if ($routeParams.condition !== null || $routeParams.condition !== "") {
         type = $routeParams.condition;
     }
-
-    if (patientid.length == 11) {
+    if ($routeParams.searchterm !== null || $routeParams.searchterm !== "") {
+        searchTerm = $routeParams.searchterm;
+    }
+    if (searchTerm == "withsearchterm") {
         var getPatient = patientService.getPatientByContact(patientid);
         getPatient.then(function (pl) {
             $scope.patientDetails = pl.data;
-            $scope.PatientStatus = "Patients with contact " + patientid;
+            $scope.PatientStatus = "Patients matching searchterm '" + patientid + "'";
         }, function (errorPl) {
             $log.error('Error loading prescription data', errorPl);
         });

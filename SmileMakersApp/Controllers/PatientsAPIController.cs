@@ -59,7 +59,7 @@ namespace SmileMakersApp.Controllers
         public IHttpActionResult GetPatient(string contact)
         {
             var selectedPatient = from patient in db.Patients
-                                  where patient.contact == contact
+                                  where patient.contact == contact || patient.name.Contains(contact)
                                   select new
                                   {
                                       id = patient.id,

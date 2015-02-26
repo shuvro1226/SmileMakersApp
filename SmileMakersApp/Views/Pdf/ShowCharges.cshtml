@@ -1,0 +1,87 @@
+﻿@model SmileMakersApp.Models.Prescription
+@{
+    Layout = "~/Views/Shared/_PdfLayout.cshtml";
+    var imagePath = Server.MapPath("~/images");    
+}
+<table style="width:100%; padding-bottom:20px; border-bottom:1px solid #333">
+    <tr>
+        <td width="10%" valign="top"><img src="@imagePath\icon.png" alt="mug shot" width="50" /></td>
+        <td width="40%" align="left"><h1 style="font-family:'Buxton Sketch'">SMILE MAKERS DENTAL CLINIC</h1></td>
+        <td width="50%" align="right" style="font-size:12px">
+            <b>Dr. Tahmina Zerin</b><br />B.D.S., P.G.T.<br />(Oral & Maxillofacial Surgery)<br />
+            Dhaka Dental College<br />(Conservative Dentistry & Endodontics)<br />B.S.M.M.U. [PG Hospital]
+        </td>
+    </tr>
+</table>
+<table style="width: 100%; margin-top:20px">
+    <tr>
+        <td width="50%" align="left"><b>Prescription ID:</b>&nbsp;@Model.id</td>
+    </tr>
+</table>
+<table style="width: 100%; margin-top:20px">
+    <tr>
+        <td width="50%" align="left"><b>Name:</b>&nbsp;@Model.Patient.name</td>
+        <td width="50%" align="right"><b>Contact:</b>&nbsp;@Model.Patient.contact</td>
+    </tr>
+</table>
+<h3 style="font-family:'Buxton Sketch'">Consultation Charges</h3>
+<table style="width:100%; margin-top:20px" cellpadding="10">
+    <tr>
+        <td width="30%">Surgeon Charge</td>
+        <td width="70%">@Model.ConsultationCharges.First().surgeon_charge</td>
+    </tr>
+    <tr>
+        <td width="30%">Assisstant Charge</td>
+        <td width="70%">@Model.ConsultationCharges.First().assisstant_charge</td>
+    </tr>
+    <tr>
+        <td width="30%">OT Charge</td>
+        <td width="70%">@Model.ConsultationCharges.First().ot_charge</td>
+    </tr>
+    <tr>
+        <td width="30%">Suction Tube</td>
+        <td width="70%">@Model.ConsultationCharges.First().suction_tube</td>
+    </tr>
+    <tr>
+        <td width="30%">Gloves</td>
+        <td width="70%">@Model.ConsultationCharges.First().gloves</td>
+    </tr>
+    <tr>
+        <td width="30%">Sterilization Cost</td>
+        <td width="70%">@Model.ConsultationCharges.First().sterilization_cost</td>
+    </tr>
+    <tr>
+        <td width="30%">Needle</td>
+        <td width="70%">@Model.ConsultationCharges.First().needle</td>
+    </tr>
+    <tr>
+        <td width="30%">Remar File</td>
+        <td width="70%">@Model.ConsultationCharges.First().remar_file</td>
+    </tr>
+    <tr>
+        <td width="30%">Polishing Bar</td>
+        <td width="70%">@Model.ConsultationCharges.First().polishing_bar</td>
+    </tr>
+    <tr>
+        <td width="30%">Polishing Paste</td>
+        <td width="70%">@Model.ConsultationCharges.First().polishing_paste</td>
+    </tr>
+    <tr>
+        <td width="30%">Bar</td>
+        <td width="70%">@Model.ConsultationCharges.First().bar</td>
+    </tr>
+</table>
+<table cellpadding="10" style="width:100%; margin-top:20px; border-top:1px solid #000000">
+    <tr>
+        <td width="30%">Total Charge</td>
+        <td width="70%">BDT @(Model.ConsultationCharges.First().surgeon_charge + Model.ConsultationCharges.First().assisstant_charge + Model.ConsultationCharges.First().ot_charge + Model.ConsultationCharges.First().suction_tube + Model.ConsultationCharges.First().gloves + Model.ConsultationCharges.First().sterilization_cost + Model.ConsultationCharges.First().needle + Model.ConsultationCharges.First().remar_file + Model.ConsultationCharges.First().polishing_bar + Model.ConsultationCharges.First().polishing_paste + Model.ConsultationCharges.First().bar)</td>
+    </tr>
+</table>
+<table style="width:100%; margin-top:50px; bottom:0" cellpadding="20">
+    <tr>
+        <td width="70%" align="right">&nbsp;</td>
+        <td width="30%" align="center" style="border-top:1px solid #000000">
+            Dr. Tahmina Zerin<br />@DateTime.Now
+        </td>
+    </tr>
+</table>

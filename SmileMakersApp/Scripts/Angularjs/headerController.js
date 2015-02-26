@@ -6,7 +6,7 @@ app.controller("headerController", function ($scope, $location) {
     $scope.showPatient = function () {
         if ($scope.PatientContact.length !== 0) {
             $('#search-container').removeClass('open');
-            $location.path('/patient/' + $scope.PatientContact);
+            $location.path('/patientdetail/withsearchterm/' + $scope.PatientContact);
             $scope.PatientContact = "";
         }
         

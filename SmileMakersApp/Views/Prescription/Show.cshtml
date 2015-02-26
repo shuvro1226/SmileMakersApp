@@ -44,9 +44,7 @@
                     </div>
                     <div class="col-xs-6">
                         <div class="panel-buttons">
-                            <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="printPrescription()">
-                                <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
-                            </button>
+                            <a class="btn-default btn" data-ng-href="@Url.Action("ShowPdf", "Pdf")/{{prescription.id}}" target="_blank"><span class="glyphicon glyphicon-print"></span></a>
                             <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="updatePrescription(prescription.id)">
                                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                             </button>
@@ -114,6 +112,7 @@
                     </div>
                     <div class="col-xs-6">
                         <div class="panel-buttons">
+                            <a class="btn-default btn" data-ng-href="@Url.Action("ShowCharges", "Pdf")/{{prescription.id}}" target="_blank"><span class="glyphicon glyphicon-print"></span></a>
                             <button type="button" class="btn btn-default" ng-click="addCharges()">
                                 <span class="glyphicon glyphicon-pencil"></span>
                             </button>

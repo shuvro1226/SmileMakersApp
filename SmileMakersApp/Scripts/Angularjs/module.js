@@ -31,7 +31,7 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
     }).when('/prescription/:id',
     {
         templateUrl: 'Prescription/Details'
-    }).when('/patient/:id',
+    }).when('/patientdetail/:searchterm/:id',
     {
         templateUrl: 'Patients/Index'
     }).when('/appointment/:id',

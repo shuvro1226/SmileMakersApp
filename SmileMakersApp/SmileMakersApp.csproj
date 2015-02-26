@@ -39,7 +39,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="itextsharp">
+      <HintPath>..\packages\iTextSharp.5.5.5\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp.xmlworker">
+      <HintPath>..\packages\itextsharp.xmlworker.5.5.5\lib\itextsharp.xmlworker.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MvcRazorToPdf">
+      <HintPath>..\packages\MvcRazorToPdf.1.0.2\lib\40\MvcRazorToPdf.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -183,6 +192,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PatientsAPIController.cs" />
     <Compile Include="Controllers\PatientsController.cs" />
+    <Compile Include="Controllers\PdfController.cs" />
     <Compile Include="Controllers\PrescribedTreatmentsAPIController.cs" />
     <Compile Include="Controllers\PrescriptionController.cs" />
     <Compile Include="Controllers\PrescriptionsAPIController.cs" />
@@ -195,6 +205,7 @@
     <Compile Include="Models\Appointment.cs">
       <DependentUpon>SmileMakersAppDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BasketItem.cs" />
     <Compile Include="Models\Consultation.cs">
       <DependentUpon>SmileMakersAppDataModel.tt</DependentUpon>
     </Compile>
@@ -208,6 +219,7 @@
     <Compile Include="Models\Patient.cs">
       <DependentUpon>SmileMakersAppDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PdfExample.cs" />
     <Compile Include="Models\PrescribedTreatment.cs">
       <DependentUpon>SmileMakersAppDataModel.tt</DependentUpon>
     </Compile>
@@ -290,7 +302,6 @@
     <Content Include="Scripts\Angularjs\addChargesController.js" />
     <Content Include="Scripts\Angularjs\appointmentController.js" />
     <Content Include="Scripts\Angularjs\consultationController.js" />
-    <Content Include="Scripts\Angularjs\icon.jpg" />
     <Content Include="Scripts\Angularjs\module.js" />
     <Content Include="Scripts\Angularjs\patientController.js" />
     <Content Include="Scripts\Angularjs\prescriptionController.js" />
@@ -331,20 +342,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\jspdf\icon.jpg" />
-    <Content Include="Scripts\jspdf\jspdf.js" />
-    <Content Include="Scripts\jspdf\jspdf.plugin.addimage.js" />
-    <Content Include="Scripts\jspdf\jspdf.plugin.cell.js" />
-    <Content Include="Scripts\jspdf\jspdf.plugin.from_html.js" />
-    <Content Include="Scripts\jspdf\jspdf.plugin.ie_below_9_shim.js" />
-    <Content Include="Scripts\jspdf\jspdf.plugin.javascript.js" />
-    <Content Include="Scripts\jspdf\jspdf.plugin.sillysvgrenderer.js" />
-    <Content Include="Scripts\jspdf\jspdf.plugin.split_text_to_size.js" />
-    <Content Include="Scripts\jspdf\jspdf.plugin.standard_fonts_metrics.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\PDFMake\icon.jpg" />
-    <Content Include="Scripts\PDFMake\pdfmake.min.js" />
-    <Content Include="Scripts\PDFMake\vfs_fonts.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
@@ -385,6 +383,12 @@
     <Content Include="Views\Treatments\Create.cshtml" />
     <Content Include="Views\Patients\Index.cshtml" />
     <Content Include="Views\Appointments\Create.cshtml" />
+    <Content Include="Views\Pdf\ShowPdf.cshtml" />
+    <Content Include="Views\Pdf\IndexWithAccessToDocumentAndWriter.cshtml" />
+    <Content Include="Views\Pdf\IndexWithAccessToDocumentAndWriterDownloadFile.cshtml" />
+    <Content Include="Views\Pdf\SaveToAppData.cshtml" />
+    <Content Include="Views\Shared\_PdfLayout.cshtml" />
+    <Content Include="Views\Pdf\ShowCharges.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
